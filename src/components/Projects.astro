@@ -1,0 +1,367 @@
+---
+// src/components/Projects.astro
+
+// --- IMAGE HANDLING ---
+// This is the recommended Astro way to handle local images.
+// Import the image file directly. Astro's build process will handle the rest.
+import { Image } from "astro:assets";
+import anikioImage from "../assets/anikio2.jpeg";
+import bci from "../assets/bci2.png";
+import recordabot from "../assets/recordabot.png";
+import excluido from "../assets/excluido.jpg";
+
+const tech = {
+  "React":"https://icon.icepanel.io/Technology/svg/React.svg",
+  'C lang': 'https://icon.icepanel.io/Technology/svg/C.svg',
+  "Astro":"https://icon.icepanel.io/Technology/png-shadow-512/Astro.png",
+  "Node.js":"https://icon.icepanel.io/Technology/svg/Node.js.svg",
+  "Jquery":"https://icon.icepanel.io/Technology/svg/jQuery.svg",
+  "AWS":"https://icon.icepanel.io/Technology/png-shadow-512/AWS.png",
+  "Django":"https://icon.icepanel.io/Technology/png-shadow-512/Django.png",
+  "Docker":"https://icon.icepanel.io/Technology/svg/Docker.svg",
+  "Git":"https://icon.icepanel.io/Technology/svg/Git.svg",
+  "Ruby":"https://icon.icepanel.io/Technology/svg/Ruby.svg",
+  "TypeScript":"https://icon.icepanel.io/Technology/svg/TypeScript.svg",
+  "Tailwind":"https://icon.icepanel.io/Technology/svg/Tailwind-CSS.svg",
+  "Rust":"https://icon.icepanel.io/Technology/png-shadow-512/Rust.png",
+  "QT":"https://icon.icepanel.io/Technology/svg/Qt-Framework.svg",
+  "Python":"https://icon.icepanel.io/Technology/svg/Python.svg",
+  "PostgreSQL":"https://icon.icepanel.io/Technology/svg/PostgresSQL.svg",
+  "Next":"https://icon.icepanel.io/Technology/png-shadow-512/Next.js.png",
+  "Kotlin":"https://icon.icepanel.io/Technology/svg/Kotlin.svg",
+};
+// --- PROJECT DATA ---
+const projects = [
+  
+  {
+    title: "Anikio",
+    description: "El Async Event Loop que Python no tiene",
+    imageUrl: anikioImage,
+    repoLink: "https://github.com/path/Anikio",
+    techs: [tech['Python']],
+    click: "https://github.com/path/Anikio",
+  },
+  {
+    title: "BCI++",
+    description: "Filtros, reactivo, rapido... una mejor que BCI",
+    imageUrl: bci,
+    liveLink: "https://bcibeneficios.onrender.com/",
+    competencia: 'https://www.bci.cl/beneficios/beneficios-bci',
+    techs: [tech['Astro'],tech['TypeScript']],
+    click: "https://bcibeneficios.onrender.com/",
+  },
+  {
+    title: "RecordaBot",
+    description: "Para cuando no te han pagado...",
+    imageUrl: recordabot,
+    liveLink: 'https://recordabot.vercel.app/',
+    click: 'https://recordabot.vercel.app/',
+    techs: [tech['Next'],tech['Tailwind'],tech['TypeScript']]
+  },
+  {
+    title: "Excluido",
+    description: "Juego de cartas mobil, multiplayer usando protocolo MQTT",
+    imageUrl: excluido,
+    techs: [tech['Django'],tech['Kotlin']]
+
+  },
+  
+];
+---
+
+<section class="carousel-section">
+  <h2 class="section-header">Mis Side-Projects</h2>
+  <div class="carousel-viewport">
+    <div id="carousel-track" class="carousel-track">
+      {
+        projects.map((project, index) => (
+          <div class="carousel-slide" data-index={index}>
+            <div class="project-card">
+              
+
+              <Image
+                src={project.imageUrl}
+                alt={`Screenshot of ${project.title}`}
+                class="card-image"
+                />
+              
+              <div class="card-content">
+                 <div class="card-header">
+                  <h3>{project.title}</h3>
+                  <!-- Tech icons are now here -->
+                  {
+                    project.techs && project.techs.length > 0 && (
+                      <div class="tech-icons">
+                        {project.techs.map((icon) => (
+                          <Image
+                            src={icon}
+                            alt="Technology icon"
+                            class="tech-icon"
+                            width="28"
+                            height="28"
+                          />
+                        ))}
+                      </div>
+                    )
+                  }
+                </div>
+                <p>{project.description}</p>
+                <div class="links">
+                  {project.liveLink && (
+                    <a
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="card-link"
+                    >
+                      Ir a verlo
+                    </a>
+                  )}
+                  {project.competencia && (
+                    <a
+                      href={project.competencia}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="card-link"
+                    >
+                      Base
+                    </a>
+                  )}
+                  {project.repoLink && (
+                    <a
+                      href={project.repoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="card-link"
+                    >
+                      GitHub
+                    </a>
+                  )}
+                </div>
+              </div>
+               {
+                  project.techs && project.techs.length > 0 && (
+                    <div class="tech-footer">
+                      
+                    </div>
+                  )
+                }
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* --- Carousel Layout & Header Styles --- */
+  .carousel-section {
+    padding: var(--space-xl) 0;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    /* margin-bottom: var(--space-xl); */
+    background: linear-gradient(
+      90deg,
+      var(--text-secondary),
+      var(--text-primary),
+      var(--text-secondary)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-bottom: var(--space-sm);
+    animation: shine 5s linear infinite;
+    background-size: 200% 100%;
+  }
+
+  @keyframes shine {
+    to {
+      background-position: -200% center;
+    }
+  }
+
+  .carousel-viewport {
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 15%,
+      black 85%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 15%,
+      black 85%,
+      transparent 100%
+    );
+  }
+
+  .carousel-track {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .carousel-slide {
+    transform: scale(0.7);
+    opacity: 0.5;
+    transition:
+      transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+      opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .carousel-slide.is-active {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .carousel-slide:not(.is-active):hover {
+    transform: scale(0.75);
+    opacity: 0.7;
+  }
+
+  .carousel-slide.is-active:hover {
+    box-shadow: 0 0 40px 12px rgba(0, 122, 255, 0.4);
+    border-radius: 10%;
+  }
+
+
+  
+
+  /* --- Project Card Styles (Merged) --- */
+  .project-card {
+    width: 650px;
+    flex-shrink: 0;
+    background-color: #1f1f1f;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition:
+      transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+      opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .card-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+    /* --- THE FIX --- */
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .card-content {
+    padding: var(--space-lg);
+  }
+
+  h3 {
+    font-size: 1.75rem;
+    margin-top: 0;
+    /* margin-bottom: var(--space-sm); */
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+
+  .links {
+    display: flex;
+    gap: var(--space-md);
+    /* margin-top: var(--space-md); */
+    justify-content: center;
+  }
+
+  .card-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .card-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .project-card {
+      width: 90vw;
+    }
+  }
+
+   .card-header {
+    display: flex;
+    justify-content: space-between; /* Pushes title left, icons right */
+    align-items: center; /* Vertically aligns them */
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
+  }
+
+  .tech-icons {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm); /* Smaller gap between icons */
+    flex-shrink: 0; /* Prevents icons from wrapping if title is long */
+  }
+
+  .tech-icon {
+    /* filter: grayscale(100%) opacity(70%); */
+    transition:
+      filter 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .tech-icon:hover {
+    filter: grayscale(0%) opacity(100%);
+    transform: scale(1.1);
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const track = document.getElementById("carousel-track");
+    if (!track) return;
+
+    const slides = Array.from(track.children);
+    if (slides.length === 0) return;
+
+    const initialIndex = Math.min(3, slides.length - 1);
+    let currentIndex = initialIndex;
+
+    const updateCarousel = () => {
+      const activeSlide = slides[currentIndex];
+      const slideWidth = activeSlide.offsetWidth;
+      const gap = parseInt(getComputedStyle(track).gap) || 32;
+
+      const offset =
+        -activeSlide.offsetLeft +
+        track.parentElement.offsetWidth / 2 -
+        slideWidth / 2;
+
+      track.style.transform = `translateX(${offset}px)`;
+
+      slides.forEach((slide, index) => {
+        slide.classList.toggle("is-active", index === currentIndex);
+      });
+    };
+
+    slides.forEach((slide) => {
+      slide.addEventListener("click", () => {
+        currentIndex = parseInt(slide.dataset.index);
+        updateCarousel();
+      });
+    });
+
+    window.addEventListener("resize", updateCarousel);
+    // updateCarousel();
+  });
+</script>

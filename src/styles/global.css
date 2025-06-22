@@ -1,0 +1,51 @@
+/* src/styles/global.css */
+
+/* 1. CSS Variables (Design Tokens) */
+:root {
+  --bg-dark: rgb(18, 18, 18);
+  --text-primary: rgb(242, 242, 242);
+  --text-secondary: rgb(179, 179, 179);
+  --accent: rgb(0, 122, 255);
+  --accent-darker: rgb(0, 102, 215);
+
+  /* Category Colors */
+  --frontend: rgb(97, 218, 251);
+  --backend: rgb(104, 159, 56);
+  --database: rgb(51, 103, 145);
+  --devops: rgb(240, 101, 41);
+
+  /* Spacing */
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+}
+
+/* 2. Base Styles */
+body {
+  margin: 0;
+  background-color: var(--bg-dark);
+  font-family: "Inter", sans-serif;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+/* 3. Global Animation Classes */
+.project-grid.has-highlight .project-card:not(.is-highlighted) {
+  opacity: 0.5;
+  transform: scale(0.95);
+}
+
+.project-card.is-highlighted {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px 5px rgba(0, 122, 255, 0.5);
+  z-index: 10;
+  opacity: 1;
+}

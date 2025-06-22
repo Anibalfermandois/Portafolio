@@ -1,0 +1,82 @@
+---
+// src/components/Hero.astro
+import { Image } from 'astro:assets'
+import profile from '../assets/profile.png'
+---
+
+<section>
+  <div class="content">
+    <h1>Aníbal Fermandois</h1>
+    <h2>Full Stack Developer en <a style='color:white' target="_blank" href="https://nikola.cl/">Nikola</a>⚡️</h2>
+    <p>
+      Desarrollador Full Stack con una sólida formación en Ingeniería Civil de la Pontificia Universidad Católica.
+
+Apasionado por resolver problemas complejos a través de la tecnología, mi objetivo es diseñar y construir soluciones digitales eficientes, robustas y escalables. Desde inicios de 2025, aplico y expando mis habilidades en el equipo de Nikola.
+    <p>
+  </div>
+  <div class="image-wrapper">
+    <Image
+      src={profile}
+      alt="Yo"
+      class='profile'
+    />
+  </div>
+</section>
+
+<style>
+  section {
+    display: grid;
+    grid-template-columns: 3fr 2fr; /* 60% / 40% split */
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-xl) 0;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-md);
+  }
+
+  p {
+    font-size: 1.1rem;
+    max-width: 60ch; /* Limits line length for readability */
+  }
+
+  .image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img {
+    object-position: 50% 45%;
+    width: 20rem;
+    height: 25rem;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Responsive stacking for smaller screens */
+  @media (max-width: 768px) {
+    section {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .content {
+      order: 2; /* Text comes after image on mobile */
+    }
+    .image-wrapper {
+      order: 1;
+    }
+    p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+</style>

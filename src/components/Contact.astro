@@ -1,0 +1,43 @@
+---
+// src/components/Contact.astro
+---
+
+<section>
+  <h2>
+    <a href="mailto:anibal.fermandois@uc.cl" class="contact-button">
+    Escribeme!
+  </a>
+  </h2>
+</section>
+
+<style>
+  section {
+    text-align: center;
+    padding: var(--space-xl) 0;
+  }
+  h2 {
+    font-size: 2.2rem;
+    margin-bottom: var(--space-md);
+  }
+  p {
+    max-width: 50ch;
+    margin: 0 auto var(--space-lg);
+  }
+  .contact-button {
+    display: inline-block;
+    background-color: var(--accent);
+    color: var(--text-primary);
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease;
+  }
+  .contact-button:hover {
+    transform: scale(1.05);
+    background-color: var(--accent-darker);
+  }
+</style>

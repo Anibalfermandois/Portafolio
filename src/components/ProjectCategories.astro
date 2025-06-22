@@ -1,0 +1,71 @@
+---
+// src/components/ProjectCategories.astro
+---
+
+<section>
+  <div class="category-button frontend">
+    <span class="dot"></span>Frontend
+  </div>
+  <div class="category-button backend">
+    <span class="dot"></span>Backend
+  </div>
+  <div class="category-button database">
+    <span class="dot"></span>Database
+  </div>
+  <div class="category-button devops">
+    <span class="dot"></span>DevOps
+  </div>
+</section>
+
+<style>
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-md);
+    padding: var(--space-lg) 0;
+  }
+  .category-button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 600;
+  }
+  .dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+  }
+
+  /* Specific category colors */
+  .frontend {
+    background-color: rgba(97, 218, 251, 0.1);
+    color: var(--frontend);
+  }
+  .frontend .dot {
+    background-color: var(--frontend);
+  }
+  .backend {
+    background-color: rgba(104, 159, 56, 0.1);
+    color: var(--backend);
+  }
+  .backend .dot {
+    background-color: var(--backend);
+  }
+  .database {
+    background-color: rgba(51, 103, 145, 0.1);
+    color: var(--database);
+  }
+  .database .dot {
+    background-color: var(--database);
+  }
+  .devops {
+    background-color: rgba(240, 101, 41, 0.1);
+    color: var(--devops);
+  }
+  .devops .dot {
+    background-color: var(--devops);
+  }
+</style>

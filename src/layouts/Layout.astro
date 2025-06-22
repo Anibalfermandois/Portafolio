@@ -1,0 +1,36 @@
+---
+// src/layouts/Layout.astro
+interface Props {
+  title: string;
+}
+import favicon from '../assets/favicon.png'
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Aníbal Fermandois Portafolio" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml+png" href={favicon.src} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <!-- Google Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Import Global CSS -->
+    <style is:global>
+      @import "../styles/global.css";
+    </style>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
