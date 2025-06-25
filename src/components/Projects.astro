@@ -9,6 +9,7 @@ import anikioImage from "../assets/anikio2.jpeg";
 import bci from "../assets/bci2.png";
 import recordabot from "../assets/recordabot.png";
 import excluido from "../assets/excluido.jpg";
+import sendapp from "../assets/sendapp.jpeg";
 
 const tech = {
   "React":"https://icon.icepanel.io/Technology/svg/React.svg",
@@ -29,13 +30,14 @@ const tech = {
   "PostgreSQL":"https://icon.icepanel.io/Technology/svg/PostgresSQL.svg",
   "Next":"https://icon.icepanel.io/Technology/png-shadow-512/Next.js.png",
   "Kotlin":"https://icon.icepanel.io/Technology/svg/Kotlin.svg",
+  "ReactNative":"https://icons8.com/icon/YYYhFVbH4vFv/react-native",
 };
 // --- PROJECT DATA ---
 const projects = [
   
   {
     title: "Anikio",
-    description: "El Async Event Loop que Python no tiene",
+    description: "El Async Event Loop para async functions sin 'async def'",
     imageUrl: anikioImage,
     repoLink: "https://github.com/path/Anikio",
     techs: [tech['Python']],
@@ -71,14 +73,12 @@ const projects = [
 
 <section class="carousel-section">
   <h2 class="section-header">Mis Side-Projects</h2>
-  <div class="carousel-viewport">
+    <div id="carousel-viewport" class="carousel-viewport">
     <div id="carousel-track" class="carousel-track">
       {
         projects.map((project, index) => (
           <div class="carousel-slide" data-index={index}>
             <div class="project-card">
-              
-
               <Image
                 src={project.imageUrl}
                 alt={`Screenshot of ${project.title}`}
@@ -188,7 +188,10 @@ const projects = [
 
   .carousel-viewport {
     width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    scroll-snap-type: x mandatory;
+    padding: 0 var(--space-lg);
     -webkit-mask-image: linear-gradient(
       to right,
       transparent 0%,
@@ -213,11 +216,13 @@ const projects = [
   }
 
   .carousel-slide {
-    transform: scale(0.7);
-    opacity: 0.5;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    transform: scale(0.8);
+    opacity: 1.5;
     transition:
-      transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-      opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+           transform 0.4s ease,
+      opacity 0.4s ease;
   }
 
   .carousel-slide.is-active {
@@ -240,7 +245,7 @@ const projects = [
 
   /* --- Project Card Styles (Merged) --- */
   .project-card {
-    width: 650px;
+    width: 600px;
     flex-shrink: 0;
     background-color: #1f1f1f;
     border-radius: 16px;
