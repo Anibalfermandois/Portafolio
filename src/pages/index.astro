@@ -1,27 +1,81 @@
----
+--- 
 // src/pages/index.astro
-import Layout from "../layouts/Layout.astro";
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Hero from "../components/Hero.astro";
 import Technologies from "../components/Technologies.astro";
-import ProjectCategories from "../components/ProjectCategories.astro";
-import Projects from "../components/Projects.astro";
 import Contact from "../components/Contact.astro";
+import '../styles/global.css';
+
+// Fetch all docs
+const allDocs = await getCollection('docs');
+
+// Filter for Experience
+const experiences = allDocs.filter(doc => doc.id.startsWith('experience/'));
+
+// Filter for Projects
+const projects = allDocs.filter(doc => doc.id.startsWith('projects/'));
 ---
 
-<Layout title="Aníbal Fermandois">
-  <main>
+<StarlightPage frontmatter={{ title: 'Aníbal Fermandois', template: 'splash' }}>
     <Hero />
-    <ProjectCategories />
+    
+    <section class="py-12">
+      <h2>Experience</h2>
+      <div class="grid gap-6">
+        {experiences.map(exp => (
+          <div class="border p-6 rounded-lg bg-[var(--sl-color-gray-6)] border-[var(--sl-color-gray-5)] hover:border-[var(--sl-color-accent)] transition-colors">
+            <h3 class="text-xl font-bold mb-2"><a href={`/${exp.id}`} class="no-underline text-[var(--sl-color-white)]">{exp.data.title}</a></h3>
+            <p class="text-[var(--sl-color-gray-2)] mb-4">{exp.data.description}</p>
+             <a href={`/${exp.id}`} class="text-[var(--sl-color-accent)] hover:underline font-semibold">Read more &rarr;</a>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="projects" class="py-12">
+      <h2>Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {projects.map(proj => (
+          <div class="group border rounded-xl overflow-hidden bg-[var(--sl-color-gray-6)] border-[var(--sl-color-gray-5)] hover:border-[var(--sl-color-accent)] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+             {proj.data.hero?.image?.file && (
+               <div class="overflow-hidden aspect-video">
+                 <Image 
+                   src={proj.data.hero.image.file} 
+                   alt={proj.data.hero.image.alt || proj.data.title}
+                   class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                 />
+               </div>
+             )}
+             <div class="p-6">
+                <h3 class="text-2xl font-bold mb-2 leading-tight">
+                  <a href={`/${proj.id}`} class="no-underline text-[var(--sl-color-white)] group-hover:text-[var(--sl-color-accent)] transition-colors">
+                    {proj.data.title}
+                  </a>
+                </h3>
+                <p class="text-[var(--sl-color-gray-2)] mb-6 line-clamp-3 leading-relaxed">
+                  {proj.data.description}
+                </p>
+                <a href={`/${proj.id}`} class="inline-flex items-center text-[var(--sl-color-accent)] font-semibold hover:gap-2 transition-all">
+                  View Project <span class="ml-2">&rarr;</span>
+                </a>
+             </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
     <Technologies />
-    <Projects />
     <Contact />
-  </main>
-</Layout>
+</StarlightPage>
 
 <style>
-  main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 var(--space-lg);
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    color: var(--sl-color-white);
+    letter-spacing: -0.025em;
   }
 </style>

@@ -24,49 +24,28 @@ const technologies = [
 ];
 ---
 
-<section>
-  <h2>Technologias que tengo en PROD</h2>
-  <div class="icon-grid">
+<section class="py-12">
+  <h2 class="text-4xl font-extrabold mb-8 text-[var(--sl-color-white)] tracking-tight">
+    Tecnologías en Producción
+  </h2>
+  <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-8">
     {
       technologies.map((tech) => (
-        <div class="tech-item">
-          <Image src={tech[1]}  alt={tech[0]} width='100' height='100' />
-          <span>{tech[0]}</span>
+        <div class="flex flex-col items-center gap-3 group p-4 rounded-lg hover:bg-[var(--sl-color-gray-6)] transition-all duration-300">
+          <div class="w-16 h-16 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1">
+            <Image 
+              src={tech[1]} 
+              alt={tech[0]} 
+              width='64' 
+              height='64' 
+              class="w-full h-full object-contain drop-shadow-md"
+            />
+          </div>
+          <span class="text-sm font-medium text-[var(--sl-color-gray-2)] group-hover:text-[var(--sl-color-white)] transition-colors text-center">
+            {tech[0]}
+          </span>
         </div>
       ))
     }
   </div>
 </section>
-
-<style>
-  section {
-    text-align: center;
-    padding: var(--space-xl) 0;
-  }
-  h2 {
-    font-size: 2.2rem;
-    margin-bottom: var(--space-lg);
-  }
-  .icon-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-lg);
-  }
-  .tech-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-sm);
-  }
-  .icon-placeholder {
-    width: 4rem;
-    height: 4rem;
-    background-color: #2a2a2a;
-    border-radius: 50%;
-    transition: transform 0.2s ease-in-out;
-  }
-  .tech-item:hover .icon-placeholder {
-    transform: scale(1.1);
-  }
-</style>
