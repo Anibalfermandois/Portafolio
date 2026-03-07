@@ -1,0 +1,140 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/D2/Hero.astro";
+import Experience from "../components/D2/Experience.astro";
+import Projects from "../components/D2/Projects.astro";
+import Popover from "../components/D2/Popover.astro";
+import { personalInfo, technologies } from "../data/portfolio";
+---
+
+<Layout title="Aníbal Fermandois - Porfolio (Dev Mode)">
+    <div
+        class="min-h-screen bg-slate-950 font-sans text-slate-300 selection:bg-emerald-500/30 selection:text-emerald-200"
+    >
+        <div class="fixed inset-0 pointer-events-none z-0">
+            <div
+                class="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20"
+            >
+            </div>
+        </div>
+
+        <div class="relative z-10">
+            {/* Dev Header */}
+            <nav
+                class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40"
+            >
+                <div
+                    class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center text-xs font-mono text-slate-500"
+                >
+                    <div class="flex gap-4 items-center">
+                        <span class="text-emerald-400 animate-pulse"
+                            >● Live</span
+                        >
+                        <span>v1.0.0</span>
+                        <span class="hidden md:inline"
+                            >Modo: <Popover
+                                text="El paquete de producción está minimizado, optimizado y sin console.logs"
+                                metric="Optimized">Producción</Popover
+                            >
+                        </span>
+                    </div>
+                    <div>
+                        <Popover
+                            text="Toda esta página genera ~10KB de HTML y <5KB de CSS en línea. No se cargan frameworks JS."
+                            metric="Lightweight"
+                        >
+                            <span>Estado: Óptimo</span>
+                        </Popover>
+                    </div>
+                </div>
+            </nav>
+
+            <Hero />
+            <Experience />
+            <Projects />
+
+            {/* Technologies Grid */}
+            <section class="py-24 border-b border-slate-800">
+                <div class="max-w-4xl mx-auto px-6">
+                    <div class="flex items-center gap-4 mb-12">
+                        <h2 class="text-2xl font-bold text-white">
+                            Dependencias
+                        </h2>
+                        <Popover
+                            text="Analizado desde package.json y datos de linguist de GitHub."
+                            metric="Auto-detected"
+                        >
+                            <span
+                                class="font-mono text-xs text-slate-500 bg-slate-800/50 px-2 py-1 rounded"
+                                >package.json</span
+                            >
+                        </Popover>
+                    </div>
+
+                    <div
+                        class="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-sm"
+                    >
+                        {
+                            [
+                                ...technologies.languages,
+                                ...technologies.frameworks,
+                                ...technologies.infrastructure,
+                            ]
+                                .slice(0, 16)
+                                .map((tech) => (
+                                    <div class="flex items-center gap-2 text-slate-400 group cursor-default">
+                                        <span class="text-slate-700 group-hover:text-emerald-500 transition-colors">
+                                            └─
+                                        </span>
+                                        <span class="group-hover:text-slate-200 transition-colors flex items-center gap-2">
+                                            <img
+                                                src={`https://cdn.simpleicons.org/${tech.icon}/4ade80`}
+                                                class="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity"
+                                                alt=""
+                                            />
+                                            {tech.name}
+                                        </span>
+                                    </div>
+                                ))
+                        }
+                    </div>
+                </div>
+            </section>
+
+            {/* Footer */}
+            <footer class="py-12 bg-slate-900 font-mono text-sm">
+                <div
+                    class="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6"
+                >
+                    <div class="text-slate-500">
+                        <span class="text-slate-400"
+                            >&gt; System.out.println("</span
+                        ><span class="text-emerald-400"
+                            >Disponible para trabajar</span
+                        ><span class="text-slate-400">");</span>
+                    </div>
+                    <div class="flex gap-6">
+                        <a
+                            href={`mailto:${personalInfo.contact}`}
+                            class="text-slate-400 hover:text-emerald-400 transition-colors flex items-center gap-2"
+                        >
+                            <span
+                                class="underline decoration-slate-700 underline-offset-4"
+                                >contacto</span
+                            >
+                        </a>
+                        <a
+                            href="/2"
+                            class="text-slate-400 hover:text-emerald-400 transition-colors flex items-center gap-2"
+                        >
+                            <span
+                                class="underline decoration-slate-700 underline-offset-4"
+                                >/2</span
+                            >
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</Layout>

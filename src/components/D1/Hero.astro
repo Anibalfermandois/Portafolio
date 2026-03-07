@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import profileImage from "../../assets/profile.png";
+import { personalInfo } from "../../data/portfolio";
+---
+
+<section
+    class="max-w-5xl mx-auto px-6 pt-24 pb-16 md:pt-32 md:pb-24 flex flex-col-reverse md:flex-row items-center gap-12"
+>
+    <div class="flex-1 text-center md:text-left">
+        <h1
+            class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-4"
+        >
+            Hola, soy {personalInfo.name}
+        </h1>
+        <h2 class="text-xl md:text-2xl text-blue-600 font-medium mb-6">
+            {personalInfo.title}
+        </h2>
+        <p class="text-lg text-slate-600 leading-relaxed mb-8 max-w-2xl">
+            {personalInfo.summary}
+        </p>
+        <div class="flex justify-center md:justify-start gap-4">
+            <a
+                href={`mailto:${personalInfo.contact}`}
+                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+            >
+                Contáctame
+            </a>
+            <a
+                href="#experience"
+                class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-6 py-3 rounded-lg font-medium transition-colors"
+            >
+                Ver Experiencia
+            </a>
+        </div>
+    </div>
+    <div class="w-48 h-48 md:w-80 md:h-80 shrink-0">
+        <Image
+            src={profileImage}
+            alt={personalInfo.name}
+            class="w-full h-full object-cover rounded-full shadow-2xl ring-4 ring-white"
+            loading="eager"
+        />
+    </div>
+</section>

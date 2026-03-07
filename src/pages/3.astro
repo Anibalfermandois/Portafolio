@@ -1,0 +1,134 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/D3/Hero.astro";
+import Experience from "../components/D3/Experience.astro";
+import Projects from "../components/D3/Projects.astro";
+import { technologies, personalInfo } from "../data/portfolio";
+
+const allTech = [
+    ...technologies.languages,
+    ...technologies.frameworks,
+    ...technologies.infrastructure,
+];
+---
+
+<Layout title="ANÍBAL FERMANDOIS | BRUTAL">
+    <div
+        class="min-h-screen bg-white font-sans text-black selection:bg-black selection:text-white border-x-8 border-black max-w-[1920px] mx-auto overflow-hidden"
+    >
+        <!-- Top banner -->
+        <div
+            class="border-b-8 border-black bg-red-500 text-white font-black uppercase text-xl md:text-3xl py-3 px-4 flex justify-between items-center whitespace-nowrap overflow-hidden"
+        >
+            <div class="animate-[marquee_15s_linear_infinite] flex gap-16">
+                <span>PORTAFOLIO</span>
+                <span>EDICIÓN 2026</span>
+                <span>BRUTALISTA V3</span>
+                <span>PORTAFOLIO</span>
+                <span>EDICIÓN 2026</span>
+                <span>BRUTALISTA V3</span>
+            </div>
+        </div>
+
+        <Hero />
+        <Experience />
+        <Projects />
+
+        <!-- Technologies -->
+        <section class="border-b-8 border-black bg-blue-500 p-8 md:p-20">
+            <div
+                class="max-w-7xl mx-auto border-8 border-black bg-white p-8 md:p-16 shadow-[24px_24px_0px_0px_rgba(0,0,0,1)]"
+            >
+                <h2
+                    class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-12 transform -rotate-2 inline-block bg-yellow-400 border-4 border-black px-4"
+                >
+                    TECNOLOGÍAS
+                </h2>
+
+                <div class="flex flex-wrap gap-4 md:gap-8">
+                    {
+                        allTech.map((tech, i) => (
+                            <span
+                                class={`flex items-center gap-4 text-3xl md:text-6xl font-black uppercase tracking-tight
+              ${
+                  i % 3 === 0
+                      ? "text-black"
+                      : i % 3 === 1
+                      ? "text-transparent [-webkit-text-stroke:2px_black]"
+                      : "bg-black text-white px-4"
+              }
+              hover:rotate-6 hover:scale-110 transition-transform cursor-crosshair
+            `}
+                            >
+                                <img
+                                    src={`https://cdn.simpleicons.org/${
+                                        tech.icon
+                                    }/${
+                                        i % 3 === 0 || i % 3 === 1
+                                            ? "000000"
+                                            : "ffffff"
+                                    }`}
+                                    class="w-8 h-8 md:w-12 md:h-12"
+                                    alt=""
+                                />
+                                {tech.name}
+                            </span>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer / Contact -->
+        <footer class="bg-black text-white p-8 md:p-20">
+            <div
+                class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12"
+            >
+                <div>
+                    <h2
+                        class="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none mb-8"
+                    >
+                        CONTRÁTAME<br />AHORA<br />MISMO.
+                    </h2>
+                    <a
+                        href={`mailto:${personalInfo.contact}`}
+                        class="bg-yellow-400 text-black border-4 border-white font-black uppercase text-3xl md:text-5xl px-8 py-4 inline-block hover:bg-white hover:text-black transition-colors"
+                    >
+                        CORREO
+                    </a>
+                </div>
+                <div
+                    class="flex flex-col justify-end text-xl md:text-3xl font-bold uppercase text-right space-y-4"
+                >
+                    <a
+                        href="/3"
+                        class="hover:text-red-500 hover:translate-x-4 transition-all"
+                        >ENLACE: V3</a
+                    >
+                    <a
+                        href="/4"
+                        class="hover:text-blue-500 hover:translate-x-4 transition-all"
+                        >ENLACE: V4</a
+                    >
+                    <a
+                        href="/5"
+                        class="hover:text-yellow-400 hover:translate-x-4 transition-all"
+                        >ENLACE: V5</a
+                    >
+                    <span class="text-gray-600 pt-8">(c) 2026 RAW CSS</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</Layout>
+
+<style is:global>
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+</style>

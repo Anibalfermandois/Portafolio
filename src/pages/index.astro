@@ -1,81 +1,58 @@
---- 
-// src/pages/index.astro
-import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
-import Hero from "../components/Hero.astro";
-import Technologies from "../components/Technologies.astro";
-import Contact from "../components/Contact.astro";
-import '../styles/global.css';
+---
+import Layout from "../layouts/Layout.astro";
 
-// Fetch all docs
-const allDocs = await getCollection('docs');
-
-// Filter for Experience
-const experiences = allDocs.filter(doc => doc.id.startsWith('experience/'));
-
-// Filter for Projects
-const projects = allDocs.filter(doc => doc.id.startsWith('projects/'));
+const variations = [
+	{ id: 1, name: "Variación de Diseño 1" },
+	{ id: 2, name: "Variación de Diseño 2" },
+	{ id: 3, name: "Variación de Diseño 3" },
+	{ id: 4, name: "Variación de Diseño 4" },
+	{ id: 5, name: "Variación de Diseño 5" },
+];
 ---
 
-<StarlightPage frontmatter={{ title: 'Aníbal Fermandois', template: 'splash' }}>
-    <Hero />
-    
-    <section class="py-12">
-      <h2>Experience</h2>
-      <div class="grid gap-6">
-        {experiences.map(exp => (
-          <div class="border p-6 rounded-lg bg-[var(--sl-color-gray-6)] border-[var(--sl-color-gray-5)] hover:border-[var(--sl-color-accent)] transition-colors">
-            <h3 class="text-xl font-bold mb-2"><a href={`/${exp.id}`} class="no-underline text-[var(--sl-color-white)]">{exp.data.title}</a></h3>
-            <p class="text-[var(--sl-color-gray-2)] mb-4">{exp.data.description}</p>
-             <a href={`/${exp.id}`} class="text-[var(--sl-color-accent)] hover:underline font-semibold">Read more &rarr;</a>
-          </div>
-        ))}
-      </div>
-    </section>
+<Layout title="Prototipos de Portafolio">
+	<main
+		class="min-h-screen bg-neutral-50 flex items-center justify-center p-6 antialiased"
+	>
+		<div class="max-w-md w-full space-y-8">
+			<div>
+				<h1 class="text-2xl font-light text-neutral-900 tracking-tight">
+					Prototipos
+				</h1>
+				<p class="text-sm text-neutral-500 mt-2 font-medium">
+					Selecciona una iteración de diseño
+				</p>
+			</div>
 
-    <section id="projects" class="py-12">
-      <h2>Projects</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {projects.map(proj => (
-          <div class="group border rounded-xl overflow-hidden bg-[var(--sl-color-gray-6)] border-[var(--sl-color-gray-5)] hover:border-[var(--sl-color-accent)] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
-             {proj.data.hero?.image?.file && (
-               <div class="overflow-hidden aspect-video">
-                 <Image 
-                   src={proj.data.hero.image.file} 
-                   alt={proj.data.hero.image.alt || proj.data.title}
-                   class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                 />
-               </div>
-             )}
-             <div class="p-6">
-                <h3 class="text-2xl font-bold mb-2 leading-tight">
-                  <a href={`/${proj.id}`} class="no-underline text-[var(--sl-color-white)] group-hover:text-[var(--sl-color-accent)] transition-colors">
-                    {proj.data.title}
-                  </a>
-                </h3>
-                <p class="text-[var(--sl-color-gray-2)] mb-6 line-clamp-3 leading-relaxed">
-                  {proj.data.description}
-                </p>
-                <a href={`/${proj.id}`} class="inline-flex items-center text-[var(--sl-color-accent)] font-semibold hover:gap-2 transition-all">
-                  View Project <span class="ml-2">&rarr;</span>
-                </a>
-             </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <Technologies />
-    <Contact />
-</StarlightPage>
-
-<style>
-  h2 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 2rem;
-    color: var(--sl-color-white);
-    letter-spacing: -0.025em;
-  }
-</style>
+			<nav class="flex flex-col gap-3">
+				{
+					variations.map((v) => (
+						<a
+							href={`/${v.id}`}
+							class="group relative flex items-center justify-between p-4 rounded-2xl bg-white border border-neutral-200/60 text-neutral-600 hover:text-neutral-900 hover:border-neutral-300 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] transition-all duration-300 ease-out"
+						>
+							<span class="text-sm font-medium tracking-wide">
+								{v.name}
+							</span>
+							<span class="text-neutral-400 group-hover:text-black opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="16"
+									height="16"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<path d="m18 15-6-6-6 6" />
+								</svg>
+							</span>
+						</a>
+					))
+				}
+			</nav>
+		</div>
+	</main>
+</Layout>

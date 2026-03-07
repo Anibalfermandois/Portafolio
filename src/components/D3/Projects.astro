@@ -1,0 +1,121 @@
+---
+import { Image } from "astro:assets";
+import { projects } from "../../data/portfolio";
+
+const projectImages: Record<string, any> = {
+    Anikio: import("../../assets/Anikio.webp"),
+    "BCI++": import("../../assets/bci2.png"),
+    Excluido: import("../../assets/excluido.jpg"),
+    RecordaBot: import("../../assets/recordabot.png"),
+};
+
+const bgColors = [
+    "bg-red-500",
+    "bg-blue-500",
+    "bg-yellow-400",
+    "bg-emerald-400",
+];
+---
+
+<section class="border-b-8 border-black bg-slate-100 overflow-hidden relative">
+    {/* Scrolling Marquee Background */}
+    <div
+        class="absolute inset-0 z-0 flex flex-col justify-between opacity-10 pointer-events-none overflow-hidden"
+    >
+        {
+            [...Array(6)].map((_, i) => (
+                <div
+                    class={`whitespace-nowrap text-9xl font-black uppercase ${
+                        i % 2 === 0
+                            ? "animate-[marquee_20s_linear_infinite]"
+                            : "animate-[marquee_25s_linear_infinite_reverse]"
+                    }`}
+                >
+                    PROYECTOS PERSONALES PROYECTOS PERSONALES PROYECTOS
+                    PERSONALES
+                </div>
+            ))
+        }
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 py-20 relative z-10">
+        <div
+            class="bg-black text-white inline-block px-8 py-4 mb-20 transform -rotate-2 border-8 border-black shadow-[16px_16px_0px_0px_rgba(255,0,0,1)]"
+        >
+            <h2
+                class="text-6xl md:text-8xl font-black uppercase tracking-tighter mix-blend-difference"
+            >
+                PROYECTOS
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+            {
+                projects.map((project, index) => (
+                    <a
+                        href={project.link || "#"}
+                        target={project.link ? "_blank" : "_self"}
+                        class="block group"
+                    >
+                        <div
+                            class={`border-8 border-black p-6 md:p-10 transition-transform duration-300 transform group-hover:-translate-y-4 group-hover:translate-x-4 shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] bg-white ${
+                                index % 2 !== 0 ? "md:mt-32" : ""
+                            }`}
+                        >
+                            <div
+                                class={`border-8 border-black w-full aspect-square mb-8 relative overflow-hidden bg-black`}
+                            >
+                                {projectImages[project.name] ? (
+                                    <Image
+                                        src={projectImages[project.name]}
+                                        alt={project.name}
+                                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 contrast-[1.2]"
+                                    />
+                                ) : (
+                                    <div class="w-full h-full flex items-center justify-center font-black text-white text-4xl uppercase p-8 text-center bg-black leading-none">
+                                        SIN IMAGEN
+                                    </div>
+                                )}
+                                {/* Overlay Label */}
+                                <div
+                                    class={`absolute top-4 -left-4 ${
+                                        bgColors[index % bgColors.length]
+                                    } border-4 border-black text-black px-6 py-2 font-black text-2xl uppercase transform -rotate-12`}
+                                >
+                                    #0{index + 1}
+                                </div>
+                            </div>
+
+                            <h3 class="text-4xl md:text-5xl font-black uppercase mb-4 leading-none group-hover:text-blue-600 transition-colors">
+                                {project.name}
+                            </h3>
+
+                            <p class="text-xl md:text-2xl font-bold mb-8 border-l-8 border-black pl-4">
+                                {project.description}
+                            </p>
+
+                            <div class="flex flex-wrap gap-3">
+                                {project.technologies.map((tech) => (
+                                    <span class="bg-black text-white border-2 border-black font-bold uppercase py-1 px-3 text-sm md:text-lg hover:bg-white hover:text-black transition-colors">
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    </a>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+</style>
