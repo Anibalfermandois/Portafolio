@@ -1,58 +1,81 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-const variations = [
-	{ id: 1, name: "Variación de Diseño 1" },
-	{ id: 2, name: "Variación de Diseño 2" },
-	{ id: 3, name: "Variación de Diseño 3" },
-	{ id: 4, name: "Variación de Diseño 4" },
-	{ id: 5, name: "Variación de Diseño 5" },
-];
+import Hero from "../components/D1/Hero.astro";
+import Experience from "../components/D1/Experience.astro";
+import Projects from "../components/D1/Projects.astro";
+import { personalInfo, technologies } from "../data/portfolio";
 ---
 
-<Layout title="Prototipos de Portafolio">
-	<main
-		class="min-h-screen bg-neutral-50 flex items-center justify-center p-6 antialiased"
+<Layout title="Aníbal Fermandois - Porfolio">
+	<div
+		class="min-h-screen bg-white font-sans text-slate-900 selection:bg-blue-100 selection:text-blue-900"
 	>
-		<div class="max-w-md w-full space-y-8">
-			<div>
-				<h1 class="text-2xl font-light text-neutral-900 tracking-tight">
-					Prototipos
-				</h1>
-				<p class="text-sm text-neutral-500 mt-2 font-medium">
-					Selecciona una iteración de diseño
-				</p>
-			</div>
+		<Hero />
+		<Experience />
+		<Projects />
 
-			<nav class="flex flex-col gap-3">
-				{
-					variations.map((v) => (
-						<a
-							href={`/${v.id}`}
-							class="group relative flex items-center justify-between p-4 rounded-2xl bg-white border border-neutral-200/60 text-neutral-600 hover:text-neutral-900 hover:border-neutral-300 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] transition-all duration-300 ease-out"
-						>
-							<span class="text-sm font-medium tracking-wide">
-								{v.name}
-							</span>
-							<span class="text-neutral-400 group-hover:text-black opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="16"
-									height="16"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								>
-									<path d="m18 15-6-6-6 6" />
-								</svg>
-							</span>
-						</a>
-					))
-				}
-			</nav>
-		</div>
-	</main>
+		<!-- Technologies -->
+		<section class="bg-slate-50 py-12 px-6 border-t border-slate-100">
+			<div
+				class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 justify-between"
+			>
+				<div
+					class="text-sm font-bold text-slate-400 uppercase tracking-widest"
+				>
+					Tecnologías Principales
+				</div>
+				<div
+					class="flex flex-wrap justify-center gap-4 text-sm text-slate-500"
+				>
+					{
+						[
+							...technologies.languages,
+							...technologies.frameworks,
+							...technologies.infrastructure,
+						]
+							.slice(0, 10)
+							.map((tech) => (
+								<span class="hover:text-blue-600 transition-colors cursor-default flex items-center gap-2">
+									<img
+										src={`https://cdn.simpleicons.org/${tech.icon}/64748b`}
+										class="w-4 h-4 opacity-70"
+										alt=""
+									/>
+									{tech.name}
+								</span>
+							))
+					}
+					<span class="text-slate-400">y más...</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- Contact & Footer -->
+		<footer class="bg-slate-900 text-slate-400 py-12 px-6">
+			<div
+				class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6"
+			>
+				<div>
+					<h2 class="text-white text-xl font-bold mb-2">
+						Conectémonos
+					</h2>
+					<p class="text-sm">Disponible para nuevas oportunidades.</p>
+				</div>
+				<div class="flex items-center gap-4">
+					<a
+						href={`mailto:${personalInfo.contact}`}
+						class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+					>
+						Escríbeme
+					</a>
+					<a
+						href="/"
+						class="text-slate-300 hover:text-white text-sm font-medium transition-colors"
+					>
+						Enlace al Portafolio
+					</a>
+				</div>
+			</div>
+		</footer>
+	</div>
 </Layout>

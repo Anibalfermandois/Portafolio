@@ -32,7 +32,7 @@ export const experiences: Experience[] = [
   {
     company: "Nikola Chile",
     role: "Desarrollador Full-Stack",
-    period: "Mar 2025 - Ago 2025 (Part-time)",
+    period: "Mar 2025 - Ago 2025 (Part-time y Full-time)",
     description: "Orquestación del desarrollo de ciclo completo, desde la arquitectura hasta los despliegues CI/CD.",
     link: "https://www.nikola.cl",
     featured: true,
@@ -44,7 +44,7 @@ export const experiences: Experience[] = [
   },
   {
     company: "Buda.com",
-    role: "Ingeniero de Automatización & AI / Pasante de Automatización de Software",
+    role: "Practicante de Automatización y AI",
     period: "Ago 2025 - Dic 2025",
     description: "Diseño de infraestructuras de flujos de trabajo en N8N y chatbots de IA listos para producción.",
     impact: [
