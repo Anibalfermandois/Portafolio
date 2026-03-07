@@ -1,0 +1,81 @@
+---
+import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+const experiencesCollection = await getCollection("experiences");
+---
+
+<section id="experience" class="bg-slate-50 py-20 px-6">
+    <div class="max-w-5xl mx-auto">
+        <h2
+            class="text-3xl font-bold text-slate-900 mb-12 flex items-center gap-4"
+        >
+            <span class="w-8 h-1 bg-blue-600 rounded-full"></span>
+            Experiencia Laboral
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {
+                experiencesCollection.map(async (entry: any) => {
+                    const { Content } = await render(entry);
+                    const exp = entry.data;
+                    return (
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 transition-all hover:shadow-md flex flex-col group relative">
+                            <div class="flex flex-col xl:flex-row xl:justify-between xl:items-start mb-4 gap-3">
+                                <div class="flex items-center gap-4">
+                                    {exp.logo && (
+                                        <div class="shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden bg-slate-50 border border-slate-100 flex items-center justify-center p-0">
+                                            <Image
+                                                src={exp.logo}
+                                                alt={`${exp.company} logo`}
+                                                class="w-full h-full object-contain mix-blend-multiply rounded-lg"
+                                                width={128}
+                                                height={128}
+                                            />
+                                        </div>
+                                    )}
+                                    <div>
+                                        <h3 class="text-xl font-bold text-slate-900">
+                                            {exp.link ? (
+                                                <a
+                                                    href={exp.link}
+                                                    target="_blank"
+                                                    class="hover:text-blue-600 transition-colors"
+                                                >
+                                                    {exp.role}
+                                                </a>
+                                            ) : (
+                                                exp.role
+                                            )}
+                                        </h3>
+                                        <div class="text-blue-600 font-medium mt-1 flex flex-wrap items-center gap-2">
+                                            <span>{exp.company}</span>
+                                            {exp.featured && (
+                                                <span class="bg-blue-100 text-blue-700 text-[10px] uppercase font-bold px-2 py-0.5 rounded-full whitespace-nowrap">
+                                                    Destacado
+                                                </span>
+                                            )}
+                                            <span class="text-slate-500 text-sm font-medium bg-slate-100 px-3 py-1 rounded-full whitespace-nowrap">
+                                                {exp.period}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                
+                            <div
+                                class="text-slate-700 text-sm font-medium leading-relaxed 
+                            [&_p]:mb-4 
+                            [&_ul]:space-y-2 [&_ul]:pl-4 [&_ul]:list-disc
+                            [&_li]:text-slate-600 [&_li]:leading-relaxed [&_li]:text-sm [&_li::marker]:text-blue-500
+                            [&_strong]:text-slate-800"
+                            >
+                                <Content />
+                            </div>
+                            <div class="mt-4"> </div>
+                        </div>
+                    );
+                })
+            }
+        </div>
+    </div>
+</section>

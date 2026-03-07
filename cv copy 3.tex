@@ -1,0 +1,255 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=1.5 cm, % seperation between body and page edge from the top
+    bottom=1.5 cm, % seperation between body and page edge from the bottom
+    left=1.2 cm, % seperation between body and page edge from the left
+    right=1.2 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{128, 0, 0} % define primary color (Maroon)
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Anibal Fermandois CV},
+    pdfauthor={Anibal Fermandois},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+\usepackage{mathpazo} % Palatino font for Elegant Academic
+\linespread{1.05}     % Palatino needs more leading space
+
+% Some settings:
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0.15cm} % set column seperation
+\pagenumbering{gobble} % no page numbering
+
+% Section formatting for Academic: Centered, small caps, with rule
+\titleformat{\section}{\needspace{4\baselineskip}\large\scshape\centering\color{primaryColor}}{}{0pt}{}[\vspace{2pt}\color{primaryColor}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.4 cm
+}{
+    % bottom space:
+    0.3 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0 cm + 0.00001 cm
+    }{
+        0 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{\textbullet} % use bullet points for academic separator
+
+    \begin{header}
+        \fontsize{24 pt}{24 pt}\selectfont \scshape Aníbal Fermandois
+
+        \vspace{5 pt}
+
+        \normalsize
+        \mbox{\textit{Desarrollador Full Stack \& Infraestructura de IA}}
+
+        \vspace{5 pt}
+        
+        \mbox{\faEnvelope\ \hrefWithoutArrow{mailto:anibal.fermandois@uc.cl}{anibal.fermandois@uc.cl}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\faPhone\ \hrefWithoutArrow{}{+569-6617-0056}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\faLinkedin\ \hrefWithoutArrow{https://www.linkedin.com/in/anibal-fermandois-224ab4262/}{linkedin.com/anibal-fermandois}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\faGlobe\ \hrefWithoutArrow{https://anibalfermandois.onrender.com/}{anibalfermandois.com}}%
+    \end{header}
+
+    \vspace{5 pt - 0.3 cm}
+
+    \section{Educación}
+
+    \begin{twocolentry}{Año 2020 – Presente}
+        \textbf{Pontificia Universidad Católica de Chile}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Título \textbf{Ingeniería Civil Industrial}, Diplomado en Computación
+            \item Certificado de Desarrollo Frontend \textbf{Launchpad}
+        \end{highlights}
+    \end{onecolentry}
+
+    \section{Experiencia Profesional}
+
+    \begin{twocolentry}{Ago 2025 – Dic 2025}
+        \textbf{Buda.com} -- \textit{Practicante de Automatización y AI}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Lideré la investigación y despliegue en producción de un Chatbot de IA empresarial conectando APIs complejas (Contextual Chunking, HyDE) logrando una tasa de acierto superior al 95\%.
+            \item Desarrollé recuperación de información de alta precisión utilizando Contextual Embedding y MultiVector Indexing.
+            \item Arquitecté pipelines de automatización robustos usando n8n para procesos críticos de la empresa.
+        \end{highlights}
+    \end{onecolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{Mar 2025 – Ago 2025}
+        \textbf{Nikola Chile} -- \textit{Desarrollador Full-Stack}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Diseñé y lancé la infraestructura de alto rendimiento en Next.js y Django para nikola.cl, dominando las decisiones de extremo a extremo.
+            \item Dirigí la migración de sistemas heredados a arquitecturas modernas y escalables.
+            \item Lideré la implementación de pipelines automatizados de calidad de código y herramientas de visualización de infraestructura.
+        \end{highlights}
+    \end{onecolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{1 año}
+        \textbf{Preuniversitario PreuIng UC} -- \textit{Profesor}
+    \end{twocolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{1 año}
+        \textbf{Proyecto Going UC} -- \textit{Profesor}
+    \end{twocolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{2 años}
+        \textbf{Debates Constitucionales} -- \textit{Ayudante Jefe}
+    \end{twocolentry}
+
+    \section{Proyectos de Ingeniería}
+
+    \begin{twocolentry}{Astro, TypeScript}
+        \textbf{\hrefWithoutArrow{https://bcibeneficios.onrender.com/}{BCI Beneficios}}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Versión mejorada del sitio \textit{BCI+ Descuentos} enfocada en velocidad de carga y usabilidad, integrando filtros, topes mínimos y categorías avanzadas.
+        \end{highlights}
+    \end{onecolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{Next.js, Resend}
+        \textbf{\hrefWithoutArrow{https://recordabot.vercel.app/}{RecordaBot}}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Plataforma automatizada para programar recordatorios de deudas mediante \textit{cron jobs} asíncronos y correos electrónicos.
+        \end{highlights}
+    \end{onecolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{Next.js, Playwright, Postgres}
+        \textbf{\hrefWithoutArrow{https://micarritochile.vercel.app/}{Mi Carrito}}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Plataforma \textit{E-commerce} que utiliza \textit{web scrapers} automáticos para comparar precios en tiempo real entre múltiples supermercados chilenos.
+        \end{highlights}
+    \end{onecolentry}
+
+
+    \section{Competencias Técnicas y Lingüísticas}
+
+    \begin{onecolentry}
+        \textbf{Lenguajes:} Python, Javascript, Typescript, Go, C, SQL
+    \end{onecolentry}
+    \vspace{0.1 cm}
+    \begin{onecolentry}
+        \textbf{Herramientas:} Django, Astro, Next.js, React, n8n, Postgres, MongoDB, AWS, Vercel, Render
+    \end{onecolentry}
+    \vspace{0.1 cm}
+    \begin{onecolentry}
+        \textbf{Idiomas:} Inglés (C1), Francés (B1)
+    \end{onecolentry}
+
+\end{document}

@@ -1,0 +1,27 @@
+---
+interface Props {
+  src: string;
+  title?: string;
+}
+
+const { src, title = "Website Preview" } = Astro.props;
+---
+
+<a
+    href={src}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="block w-full aspect-video my-6 rounded-xl overflow-hidden border border-slate-200 shadow-inner hover:border-blue-400 transition-colors relative group/preview"
+>
+    <div class="absolute inset-0 bg-blue-600/0 group-hover/preview:bg-blue-600/10 transition-colors z-10 flex items-center justify-center">
+        <span class="opacity-0 group-hover/preview:opacity-100 bg-blue-600 text-white px-4 py-2 rounded-lg font-medium shadow-lg transform translate-y-2 group-hover/preview:translate-y-0 transition-all">
+            Visitar Sitio Web
+        </span>
+    </div>
+    <iframe
+        src={src}
+        class="w-[200%] h-[200%] border-0 transform scale-50 origin-top-left pointer-events-none"
+        loading="lazy"
+        title={title}
+    />
+</a>
