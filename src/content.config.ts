@@ -28,7 +28,6 @@ const personal = defineCollection({
     name: z.string(),
     title: z.string(),
     contact: z.string(),
-    linkedin: z.string().url(),
   })
 });
 
