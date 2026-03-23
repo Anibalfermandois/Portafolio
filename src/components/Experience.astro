@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 const experiencesCollection = (await getCollection("experiences")).sort((a, b) => (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0));
 ---
 
-<section id="experience" class="bg-slate-50 py-20 px-6">
+<section id="experience" class="bg-slate-50 py-20 px-6 reveal">
     <div class="max-w-5xl mx-auto">
         <h2
             class="text-3xl font-bold text-slate-900 mb-12 flex items-center gap-4"
@@ -17,20 +17,34 @@ const experiencesCollection = (await getCollection("experiences")).sort((a, b) =
             {
                 experiencesCollection.map(async (entry: any) => {
                     const { Content } = await render(entry);
-                    const exp = entry.data;
+                    const exp = entry.data.company === "Buda.com" 
+                        ? { ...entry.data, link: entry.data.link || "https://www.buda.com" } 
+                        : entry.data;
                     return (
                         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 transition-all hover:shadow-md flex flex-col group relative">
                             <div class="flex flex-col xl:flex-row xl:justify-between xl:items-start mb-4 gap-3">
                                 <div class="flex items-center gap-4">
                                     {exp.logo && (
                                         <div class="shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden bg-slate-50 border border-slate-100 flex items-center justify-center p-0">
-                                            <Image
-                                                src={exp.logo}
-                                                alt={`${exp.company} logo`}
-                                                class="w-full h-full object-contain mix-blend-multiply rounded-lg"
-                                                width={128}
-                                                height={128}
-                                            />
+                                            {exp.link ? (
+                                                <a href={exp.link} target="_blank" rel="noopener noreferrer" class="w-full h-full">
+                                                    <Image
+                                                        src={exp.logo}
+                                                        alt={`${exp.company} logo`}
+                                                        class="w-full h-full object-contain mix-blend-multiply rounded-lg transition-transform hover:scale-110"
+                                                        width={128}
+                                                        height={128}
+                                                    />
+                                                </a>
+                                            ) : (
+                                                <Image
+                                                    src={exp.logo}
+                                                    alt={`${exp.company} logo`}
+                                                    class="w-full h-full object-contain mix-blend-multiply rounded-lg"
+                                                    width={128}
+                                                    height={128}
+                                                />
+                                            )}
                                         </div>
                                     )}
                                     <div>
@@ -48,7 +62,13 @@ const experiencesCollection = (await getCollection("experiences")).sort((a, b) =
                                             )}
                                         </h3>
                                         <div class="text-blue-600 font-medium mt-1 flex flex-wrap items-center gap-2">
-                                            <span>{exp.company}</span>
+                                            {exp.link ? (
+                                                <a href={exp.link} target="_blank" class="font-semibold hover:underline">
+                                                    {exp.company}
+                                                </a>
+                                            ) : (
+                                                <span class="font-semibold">{exp.company}</span>
+                                            )}
                                             {exp.featured && (
                                                 <span class="bg-blue-100 text-blue-700 text-[10px] uppercase font-bold px-2 py-0.5 rounded-full whitespace-nowrap">
                                                     Destacado
