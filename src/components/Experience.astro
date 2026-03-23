@@ -48,7 +48,7 @@ const experiencesCollection = (await getCollection("experiences")).sort((a, b) =
                                         </div>
                                     )}
                                     <div>
-                                        <h3 class="text-xl font-bold text-slate-900">
+                                        <h3 class="text-xl font-extrabold text-slate-900">
                                             {exp.link ? (
                                                 <a
                                                     href={exp.link}
@@ -63,11 +63,11 @@ const experiencesCollection = (await getCollection("experiences")).sort((a, b) =
                                         </h3>
                                         <div class="text-blue-600 font-medium mt-1 flex flex-wrap items-center gap-2">
                                             {exp.link ? (
-                                                <a href={exp.link} target="_blank" class="font-semibold hover:underline">
+                                                <a href={exp.link} target="_blank" class="font-bold hover:underline">
                                                     {exp.company}
                                                 </a>
                                             ) : (
-                                                <span class="font-semibold">{exp.company}</span>
+                                                <span class="font-bold">{exp.company}</span>
                                             )}
                                             {exp.featured && (
                                                 <span class="bg-blue-100 text-blue-700 text-[10px] uppercase font-bold px-2 py-0.5 rounded-full whitespace-nowrap">
