@@ -11,7 +11,7 @@ export const technologies: Record<string, Technology[]> = {
     { name: "C lang", icon: "c" },
     { name: "Ruby", icon: "ruby" },
     { name: "Rust", icon: "rust" },
-    { name: "Kotlin", icon: "kotlin" }
+    { name: "Kotlin", icon: "kotlin" },
   ],
   frameworks: [
     { name: "React", icon: "react" },
@@ -20,13 +20,13 @@ export const technologies: Record<string, Technology[]> = {
     { name: "Django", icon: "django" },
     { name: "Tailwind CSS", icon: "tailwindcss" },
     { name: "QT", icon: "qt" },
-    { name: "JQuery", icon: "jquery" }
+    { name: "JQuery", icon: "jquery" },
   ],
   infrastructure: [
     { name: "Node.js", icon: "nodedotjs" },
     { name: "AWS", icon: "amazonaws" },
     { name: "Docker", icon: "docker" },
     { name: "Git", icon: "git" },
-    { name: "PostgreSQL", icon: "postgresql" }
-  ]
+    { name: "PostgreSQL", icon: "postgresql" },
+  ],
 };
