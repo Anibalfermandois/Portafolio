@@ -6,10 +6,11 @@ const projectsCollection = await getCollection("projects");
 
 // Local images mapping based on src/assets
 const projectImages: Record<string, any> = {
-    Anikio: import("../assets/Anikio.webp"),
-    "BCI++": import("../assets/bci2.png"),
-    Excluido: import("../assets/excluido.jpg"),
-    RecordaBot: import("../assets/recordabot.png"),
+    Anikio: import("../assets/projects/Anikio.webp"),
+    "BCI++": import("../assets/projects/bci2.png"),
+    Excluido: import("../assets/projects/excluido.png"),
+    RecordaBot: import("../assets/projects/recordabot.png"),
+    "Bea's Corner": import("../assets/projects/beascorner.png"),
 };
 ---
 
@@ -41,11 +42,12 @@ const projectImages: Record<string, any> = {
                     >
                         <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 h-full flex flex-col transition-all hover:shadow-xl hover:-translate-y-1">
                             <div class="aspect-video bg-slate-100 relative overflow-hidden">
-                                {projectImages[project.name] ? (
+                                {projectImages[project.name]? (
+                                    
                                     <Image
                                         src={projectImages[project.name]}
                                         alt={project.name}
-                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        class="w-full h-full object-cover transition-transform duration-500 "
                                     />
                                 ) : (
                                     <div class="w-full h-full flex items-center justify-center text-slate-400">
@@ -66,7 +68,7 @@ const projectImages: Record<string, any> = {
                                             <span class="text-xs font-medium text-slate-600 bg-slate-100 px-2.5 py-1 rounded-md">
                                                 {tech}
                                             </span>
-                                        )
+                                        ),
                                     )}
                                 </div>
                             </div>

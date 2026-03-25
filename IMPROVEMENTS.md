@@ -40,7 +40,7 @@ Currently it's text + image + buttons on a white background. Ideas:
 - A **typing effect** or animated role title
 - Show a code snippet or terminal aesthetic that reflects the dev identity
 
-## 5. Technologies section is underwhelming
+## 5. Technologies section is underwhelming [DONE]
 
 The flat list of icons at the bottom feels like an afterthought. Consider:
 
@@ -58,7 +58,7 @@ All 4 project cards look identical. Consider:
 - Include a short "what I learned" or impact metric
 - The `IframePreview` component is only used inside experience MDX — consider using it for project demos too
 
-## 7. Footer is minimal
+## 7. Footer is minimal [DONE]
 
 The "Conectémonos" footer works but could be elevated:
 
