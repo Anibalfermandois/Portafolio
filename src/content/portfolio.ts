@@ -24,7 +24,7 @@ export const technologies: Record<string, Technology[]> = {
   ],
   infrastructure: [
     { name: "Node.js", icon: "nodedotjs" },
-    { name: "AWS", icon: "amazonaws" },
+    // { name: "AWS", icon: "amazonaws" },
     { name: "Docker", icon: "docker" },
     { name: "Git", icon: "git" },
     { name: "PostgreSQL", icon: "postgresql" },
