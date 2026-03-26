@@ -20,11 +20,13 @@ export default defineConfig({
       provider: fontProviders.fontsource(),
       name: "Outfit",
       cssVariable: "--font-outfit",
+      display: "block",
     },
     {
       provider: fontProviders.fontsource(),
       name: "Geist",
       cssVariable: "--font-geist",
+      display: "block",
     },
   ],
 });
