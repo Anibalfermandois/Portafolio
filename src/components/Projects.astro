@@ -1,17 +1,8 @@
 ---
-import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
+import EditorialImage from "./EditorialImage.astro";
 
 const projectsCollection = await getCollection("projects");
-
-// Local images mapping based on src/assets
-const projectImages: Record<string, any> = {
-    Anikio: import("../assets/projects/Anikio.webp"),
-    "BCI++": import("../assets/projects/bci2.png"),
-    Excluido: import("../assets/projects/excluido.png"),
-    RecordaBot: import("../assets/projects/recordabot.png"),
-    "Bea's Corner": import("../assets/projects/beascorner.png"),
-};
 ---
 
 <section id="projects" class="py-20 px-6 max-w-5xl mx-auto reveal">
@@ -42,12 +33,11 @@ const projectImages: Record<string, any> = {
                     >
                         <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 h-full flex flex-col transition-all hover:shadow-xl hover:-translate-y-1">
                             <div class="aspect-video bg-slate-100 relative overflow-hidden">
-                                {projectImages[project.name]? (
-                                    
-                                    <Image
-                                        src={projectImages[project.name]}
+                                {project.thumbnail ? (
+                                    <EditorialImage
+                                        src={project.thumbnail}
                                         alt={project.name}
-                                        class="w-full h-full object-cover transition-transform duration-500 "
+                                        class="w-full h-full"
                                     />
                                 ) : (
                                     <div class="w-full h-full flex items-center justify-center text-slate-400">

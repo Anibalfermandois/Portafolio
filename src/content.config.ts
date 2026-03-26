@@ -16,11 +16,13 @@ const experiences = defineCollection({
 
 const projects = defineCollection({
   loader: glob({ pattern: "*.mdx", base: "./src/content/projects" }),
-  schema: z.object({
-    name: z.string(),
-    technologies: z.array(z.string()),
-    link: z.string().optional(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      technologies: z.array(z.string()),
+      link: z.string().url().optional(), // Adding url() for better validation
+      thumbnail: image(),
+    }),
 });
 
 const personal = defineCollection({
