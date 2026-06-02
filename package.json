@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "deploy": "pnpm run build && wrangler pages deploy dist --project-name portafolio",
+    "deploy:preview": "pnpm run build && wrangler pages deploy dist --project-name portafolio --branch preview",
     "preview": "astro preview",
     "astro": "astro",
     "prepare": "vp config"
@@ -14,15 +16,17 @@
     "@astrojs/mdx": "^5.0.2",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^6.0.8",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "vite-plus": "latest"
+    "vite-plus": "latest",
+    "wrangler": "^4.95.0"
   },
   "overrides": {
     "vite": "npm:@voidzero-dev/vite-plus-core@latest",
     "vitest": "npm:@voidzero-dev/vite-plus-test@latest"
   },
-  "packageManager": "npm@11.12.0"
+  "packageManager": "pnpm@11.0.3"
 }
