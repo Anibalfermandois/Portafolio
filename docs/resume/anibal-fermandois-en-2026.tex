@@ -1,0 +1,270 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=1.35 cm, % seperation between body and page edge from the top
+    bottom=1.35 cm, % seperation between body and page edge from the bottom
+    left=1.2 cm, % seperation between body and page edge from the left
+    right=1.2 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{128, 0, 0} % define primary color (Maroon)
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Anibal Fermandois CV},
+    pdfauthor={Anibal Fermandois},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+\usepackage{mathpazo} % Palatino font for Elegant Academic
+\linespread{1.03}     % Palatino needs more leading space
+
+% Some settings:
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0.15cm} % set column seperation
+\pagenumbering{gobble} % no page numbering
+
+% Section formatting for Academic: Centered, small caps, with rule
+\titleformat{\section}{\needspace{4\baselineskip}\large\scshape\centering\color{primaryColor}}{}{0pt}{}[\vspace{2pt}\color{primaryColor}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.4 cm
+}{
+    % bottom space:
+    0.3 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0 cm + 0.00001 cm
+    }{
+        0 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{\textbullet} % use bullet points for academic separator
+
+    \begin{header}
+        \fontsize{24 pt}{24 pt}\selectfont \scshape Aníbal Fermandois
+
+        \vspace{5 pt}
+
+        \normalsize
+        \mbox{\textit{Full Stack Developer \& AI Infrastructure}}
+
+        \vspace{5 pt}
+
+        \mbox{\faEnvelope\ \hrefWithoutArrow{mailto:anibal.fermandois@gmail.com}{anibal.fermandois@gmail.com}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\faPhone\ \hrefWithoutArrow{}{+569-6617-0056}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\faLinkedin\ \hrefWithoutArrow{https://
+        linkedin.com/in/anibal-fermandois-224ab4262/}{linkedin.com/anibal-fermandois}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\faGlobe\ \hrefWithoutArrow{https://www.anibalfermandois.com/}{www.anibalfermandois.com}}%
+    \end{header}
+
+    \vspace{5 pt - 0.3 cm}
+
+    \section{Education}
+
+    \begin{twocolentry}{2020 -- Present}
+        \textbf{Pontificia Universidad Católica de Chile}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Degree in \textbf{Industrial Civil Engineering}, Computing Diploma
+            \item Frontend Development Certificate \textbf{Launchpad}
+        \end{highlights}
+    \end{onecolentry}
+
+    \section{Professional Experience}
+
+    \begin{twocolentry}{May 2026 -- Present}
+        \textbf{Falabella} -- \textit{Planning and Development Engineer}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Explore historical BigQuery data with Python, pandas, and polars, defining metrics, assumptions, and filters to evaluate store allocation and replenishment policies.
+            \item Test models, detect nonlinear relationships, patch inconsistent data, and translate findings into actionable recommendations for future supply policies.
+        \end{highlights}
+    \end{onecolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{Aug 2025 -- Dec 2025}
+        \textbf{Buda.com} -- \textit{Automation and AI Intern}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Led research and production deployment of an enterprise AI chatbot connecting complex APIs (Contextual Chunking, HyDE), reaching above 95\% accuracy.
+            \item Developed high-precision information retrieval using Contextual Embedding and MultiVector Indexing.
+            \item Architected robust automation pipelines with n8n for critical company processes.
+        \end{highlights}
+    \end{onecolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{Mar 2025 -- Aug 2025}
+        \textbf{Nikola Chile} -- \textit{Full-Stack Developer}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Designed and launched high-performance infrastructure in Next.js and Django for nikola.cl, owning end-to-end technical decisions.
+            \item Led migration from legacy systems to modern, scalable architectures.
+            \item Led implementation of automated code-quality pipelines and infrastructure visualization tools.
+            \item \textbf{Recognition Diploma} for leadership and performance developing the \href{https://www.nikola.cl}{current website}.
+        \end{highlights}
+    \end{onecolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{1 year}
+        \textbf{Preuniversitario PreuIng UC} -- \textit{Teacher}
+    \end{twocolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{1 year}
+        \textbf{Proyecto Going UC} -- \textit{Teacher}
+    \end{twocolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{2 years}
+        \textbf{Debates Constitucionales} -- \textit{Head Teaching Assistant}
+    \end{twocolentry}
+
+    \section{Engineering Projects}
+
+    \begin{twocolentry}{Astro, WebScraping}
+        \textbf{\hrefWithoutArrow{https://beascorner.onrender.com/}{Bea's Corner}}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Centralizes prices and availability for \textbf{makeup} across multiple Chilean stores (Falabella, Paris, Blushbar).
+        \end{highlights}
+    \end{onecolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{Astro, Edge Functions}
+        \textbf{\href{https://bcibeneficios.onrender.com/}{BCI Beneficios}}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Improved version of \textbf{\textit{BCI+ Discounts} }focused on load speed and usability, integrating filters, minimum spends, caps, and advanced categories.
+        \end{highlights}
+    \end{onecolentry}
+    \vspace{0.2 cm}
+
+
+    \begin{twocolentry}{Next.js, Playwright, Postgres}
+        \textbf{\hrefWithoutArrow{https://micarritochile.vercel.app/}{Mi Carrito}}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item \textit{E-commerce} platform using automated \textit{web scrapers} to compare real-time prices across multiple Chilean supermarkets.
+        \end{highlights}
+    \end{onecolentry}
+
+
+    \section{Technical and Language Skills}
+
+    \begin{onecolentry}
+        \textbf{Programming Languages:} Python, JavaScript, TypeScript, Mojo, C, SQL
+    \end{onecolentry}
+    \vspace{0.1 cm}
+    \begin{onecolentry}
+        \textbf{Tools:} Django, Astro, Next.js, React, n8n, Postgres, MongoDB, AWS, Vercel, Render
+    \end{onecolentry}
+    \vspace{0.1 cm}
+    \begin{onecolentry}
+        \textbf{Human Languages:} English (C1 TOEFL), French (B1 ICP Université), Spanish (native)
+    \end{onecolentry}
+
+\end{document}
