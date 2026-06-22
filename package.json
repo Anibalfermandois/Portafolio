@@ -8,8 +8,7 @@
     "deploy": "pnpm run build && wrangler pages deploy dist --project-name portafolio",
     "deploy:preview": "pnpm run build && wrangler pages deploy dist --project-name portafolio --branch preview",
     "preview": "astro preview",
-    "astro": "astro",
-    "prepare": "vp config"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
@@ -21,12 +20,7 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "vite-plus": "latest",
     "wrangler": "^4.95.0"
-  },
-  "overrides": {
-    "vite": "npm:@voidzero-dev/vite-plus-core@latest",
-    "vitest": "npm:@voidzero-dev/vite-plus-test@latest"
   },
   "packageManager": "pnpm@11.0.3"
 }
