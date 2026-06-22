@@ -1,11 +1,22 @@
-<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
+<div
+  class="fixed inset-0 z-0 pointer-events-none overflow-hidden"
+  aria-hidden="true"
+  transition:name="snake-background"
+  transition:persist
+>
   <canvas data-snake-background class="h-full w-full"></canvas>
 </div>
 
 <script is:inline>
   (() => {
+    if (window.__portfolioSnakeBackgroundActive) return;
+    window.__portfolioSnakeBackgroundActive = true;
+
     const canvas = document.querySelector("[data-snake-background]");
-    if (!(canvas instanceof HTMLCanvasElement)) return;
+    if (!(canvas instanceof HTMLCanvasElement)) {
+      window.__portfolioSnakeBackgroundActive = false;
+      return;
+    }
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const context = canvas.getContext("2d", { alpha: true });
@@ -125,9 +136,18 @@
     window.addEventListener("resize", resize, { passive: true });
     frameId = window.requestAnimationFrame(draw);
 
-    document.addEventListener("astro:before-swap", () => {
+    const teardown = () => {
       window.cancelAnimationFrame(frameId);
       window.removeEventListener("resize", resize);
-    });
+      document.removeEventListener("astro:before-swap", handleBeforeSwap);
+      window.__portfolioSnakeBackgroundActive = false;
+    };
+
+    const handleBeforeSwap = (event) => {
+      if (event.newDocument.querySelector("[data-snake-background]")) return;
+      teardown();
+    };
+
+    document.addEventListener("astro:before-swap", handleBeforeSwap);
   })();
 </script>

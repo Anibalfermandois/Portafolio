@@ -19,11 +19,13 @@ const copy = ui[locale].language;
 <nav
     class="fixed right-4 top-4 z-50 flex items-center gap-1 rounded-lg border border-slate-200/80 bg-white/85 p-1 text-xs font-black uppercase tracking-widest text-slate-600 shadow-lg shadow-slate-900/5 backdrop-blur-md"
     aria-label={copy.label}
+    transition:name="language-switcher"
+    transition:animate="fade"
 >
     {
         locales.map((option) => {
             const active = option === locale;
-            const href = `/${option}`;
+            const href = getLocalePath(option);
             return (
                 <a
                     href={href}

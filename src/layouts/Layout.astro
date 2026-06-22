@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { Font } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
 import SnakeBackground from "../components/SnakeBackground.astro";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import favicon from "../../public/favicon.ico";
@@ -63,6 +64,7 @@ const htmlLang = ui[locale].htmlLang;
 		<link rel="alternate" hreflang="x-default" href={getLocalePath(defaultLocale)} />
 		<Font cssVariable="--font-outfit" preload />
 		<Font cssVariable="--font-geist" preload />
+		<ClientRouter fallback="animate" />
 		<title>{title}</title>
 	</head>
 	<body>
@@ -80,11 +82,12 @@ const htmlLang = ui[locale].htmlLang;
 				entries.forEach(entry => {
 					if (entry.isIntersecting) {
 						entry.target.classList.add('active');
+						observer.unobserve(entry.target);
 					}
 				});
 			}, observerOptions);
 
-			document.addEventListener('DOMContentLoaded', () => {
+			document.addEventListener('astro:page-load', () => {
 				const revealElements = document.querySelectorAll('.reveal');
 				revealElements.forEach(el => observer.observe(el));
 			});
