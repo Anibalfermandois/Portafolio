@@ -1,103 +1,131 @@
 ---
 import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
-const experiencesCollection = (await getCollection("experiences")).sort((a, b) => (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0));
+import type { Locale } from "../i18n/config";
+import { ui } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = ui[locale].experience;
+const experiencesCollection = (await getCollection("experiences"))
+  .filter((entry) => entry.id.startsWith(`${locale}/`))
+  .sort(
+    (a, b) =>
+      (b.data.current ? 1 : 0) - (a.data.current ? 1 : 0) ||
+      (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0),
+  );
+
+const experiences = await Promise.all(
+  experiencesCollection.map(async (entry) => {
+    const { Content } = await render(entry);
+    const data =
+      entry.data.company === "Buda.com"
+        ? { ...entry.data, link: entry.data.link || "https://www.buda.com" }
+        : entry.data;
+
+    return {
+      ...entry,
+      data,
+      Content,
+    };
+  }),
+);
 ---
 
-<section id="experience" class="bg-slate-50 py-20 px-6 reveal">
-    <div class="max-w-5xl mx-auto">
-        <h2
-            class="text-3xl font-bold text-slate-900 mb-12 flex items-center gap-4"
-        >
-            <span class="w-8 h-1 bg-blue-600 rounded-full"></span>
-            Experiencia Laboral
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {
-                experiencesCollection.map(async (entry: any) => {
-                    const { Content } = await render(entry);
-                    const exp = entry.data.company === "Buda.com" 
-                        ? { ...entry.data, link: entry.data.link || "https://www.buda.com" } 
-                        : entry.data;
-                    return (
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 transition-all hover:shadow-md flex flex-col group relative">
-                            <div class="flex flex-col xl:flex-row xl:justify-between xl:items-start mb-4 gap-3">
-                                <div class="flex items-center gap-4">
-                                    {exp.logo && (
-                                        <div class="shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden bg-slate-50 border border-slate-100 flex items-center justify-center p-0">
-                                            {exp.link ? (
-                                                <a href={exp.link} target="_blank" rel="noopener noreferrer" class="w-full h-full">
-                                                    <Image
-                                                        src={exp.logo}
-                                                        alt={`${exp.company} logo`}
-                                                        class="w-full h-full object-contain mix-blend-multiply rounded-lg transition-transform hover:scale-110"
-                                                        width={128}
-                                                        height={128}
-                                                    />
-                                                </a>
-                                            ) : (
-                                                <Image
-                                                    src={exp.logo}
-                                                    alt={`${exp.company} logo`}
-                                                    class="w-full h-full object-contain mix-blend-multiply rounded-lg"
-                                                    width={128}
-                                                    height={128}
-                                                />
-                                            )}
-                                        </div>
-                                    )}
-                                    <div>
-                                        <h3 class="text-xl font-extrabold text-slate-900">
-                                            {exp.link ? (
-                                                <a
-                                                    href={exp.link}
-                                                    target="_blank"
-                                                    class="hover:text-blue-600 transition-colors"
-                                                >
-                                                    {exp.role}
-                                                </a>
-                                            ) : (
-                                                exp.role
-                                            )}
-                                        </h3>
-                                        <div class="text-blue-600 font-medium mt-1 flex flex-wrap items-center gap-2">
-                                            {exp.link ? (
-                                                <a href={exp.link} target="_blank" class="font-bold hover:underline">
-                                                    {exp.company}
-                                                </a>
-                                            ) : (
-                                                <span class="font-bold">{exp.company}</span>
-                                            )}
-                                            {exp.featured && (
-                                                <span class="bg-blue-100 text-blue-700 text-[10px] uppercase font-bold px-2 py-0.5 rounded-full whitespace-nowrap">
-                                                    Destacado
-                                                </span>
-                                            )}
-                                             <span class="text-slate-500 font-medium bg-slate-100 px-3 py-1 rounded-full whitespace-nowrap text-[11px] sm:text-xs md:text-sm">
-                                                {exp.period}
-                                            </span> 
-
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                                
-                            <div
-                                class="text-slate-700 text-sm font-medium leading-relaxed 
-                            [&_p]:mb-4 
-                            [&_ul]:space-y-2 [&_ul]:pl-4 [&_ul]:list-disc
-                            [&_li]:text-slate-600 [&_li]:leading-relaxed [&_li]:text-sm [&_li::marker]:text-blue-500
-                            [&_strong]:text-slate-800"
-                            >
-                                <Content />
-                            </div>
-                            <div class="mt-4"> </div>
-                        </div>
-                    );
-                })
-            }
-        </div>
+<section id="experience" class="bg-slate-50 px-2 py-20 sm:px-4 md:px-6 reveal">
+  <div class="mx-auto w-full max-w-6xl">
+    <div class="mb-12 flex items-center gap-4 border-b border-slate-200/60 pb-6">
+      <span class="h-1 w-8 rounded-full bg-blue-600"></span>
+      <h2 class="text-3xl font-bold text-slate-900">
+        {copy.title}
+      </h2>
     </div>
+
+    <div class="mx-auto max-w-5xl">
+      {experiences.map(({ data, Content }) => (
+        <article class="group grid grid-cols-[2rem_minmax(0,1fr)] gap-x-4 pb-12 last:pb-0 md:grid-cols-[9rem_2rem_minmax(0,1fr)] md:gap-x-6">
+          <div class="col-start-2 row-start-1 mb-3 md:col-start-1 md:mb-0 md:pt-7 md:text-right">
+            <span class="inline-flex max-w-full rounded-full border border-blue-100 bg-blue-50 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.12em] text-blue-700 md:block md:border-transparent md:bg-transparent md:px-0 md:text-slate-500">
+              {data.period}
+            </span>
+          </div>
+
+          <div class="relative col-start-1 row-span-2 row-start-1 flex justify-center md:col-start-2">
+            <div class="absolute inset-y-0 w-px bg-slate-200/90 group-last:bottom-auto group-last:h-8"></div>
+            <div class="relative mt-1 h-5 w-5 rounded-full border-4 border-white bg-slate-300 shadow-sm transition-all duration-300 group-hover:scale-125 group-hover:bg-blue-600 md:mt-7">
+              <span class="absolute -inset-1 rounded-full bg-blue-500/20 opacity-0 group-hover:animate-ping group-hover:opacity-100"></span>
+            </div>
+          </div>
+
+          <div class="col-start-2 row-start-2 md:col-start-3 md:row-start-1">
+            <div class="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-500/40 hover:shadow-md sm:p-6 md:p-8">
+              <div class="mb-6 flex items-center gap-4 border-b border-slate-100 pb-4">
+                {data.logo && (
+                  <div class="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-100 bg-slate-50 p-1.5 shadow-sm">
+                    {data.link ? (
+                      <a
+                        href={data.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="flex h-full w-full items-center justify-center"
+                      >
+                        <Image
+                          src={data.logo}
+                          alt={`${data.company} logo`}
+                          class="h-full w-full rounded-lg object-contain mix-blend-multiply"
+                          width={100}
+                          height={100}
+                        />
+                      </a>
+                    ) : (
+                      <Image
+                        src={data.logo}
+                        alt={`${data.company} logo`}
+                        class="h-full w-full rounded-lg object-contain mix-blend-multiply"
+                        width={100}
+                        height={100}
+                      />
+                    )}
+                  </div>
+                )}
+                <div>
+                  <h3 class="text-lg font-extrabold text-slate-900">
+                    {data.link ? (
+                      <a
+                        href={data.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="transition-colors hover:text-blue-600"
+                      >
+                        {data.role}
+                      </a>
+                    ) : (
+                      data.role
+                    )}
+                  </h3>
+                  <div class="mt-1 flex items-center gap-2">
+                    <span class="text-sm font-bold text-blue-600">{data.company}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="text-sm leading-relaxed text-slate-700
+                [&_a]:text-blue-600 [&_a]:hover:underline
+                [&_li]:text-sm [&_li]:leading-relaxed [&_li]:text-slate-600 [&_li::marker]:text-blue-500
+                [&_p]:mb-4 [&_p]:leading-relaxed
+                [&_strong]:text-slate-800
+                [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-4"
+              >
+                <Content />
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
 </section>

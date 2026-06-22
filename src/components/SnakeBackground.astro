@@ -1,0 +1,133 @@
+<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
+  <canvas data-snake-background class="h-full w-full"></canvas>
+</div>
+
+<script is:inline>
+  (() => {
+    const canvas = document.querySelector("[data-snake-background]");
+    if (!(canvas instanceof HTMLCanvasElement)) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const context = canvas.getContext("2d", { alpha: true });
+    if (!context) return;
+
+    const snake = {
+      cell: 18,
+      columns: 0,
+      direction: "right",
+      head: { x: 0, y: 0 },
+      rows: 0,
+      segments: [],
+      stepMs: 340,
+      turnCooldown: 0,
+      visibleLength: 18,
+    };
+
+    let dpr = 1;
+    let frameId = 0;
+    let lastStep = 0;
+
+    const randomRow = () => Math.floor(Math.random() * Math.max(snake.rows, 1));
+
+    const wrap = (value, max) => (value + max) % max;
+
+    const resize = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      snake.cell = width < 720 ? 16 : 18;
+      snake.columns = Math.max(Math.ceil(width / snake.cell) + 2, 1);
+      snake.rows = Math.max(Math.ceil(height / snake.cell) + 2, 1);
+      snake.visibleLength = width < 720 ? 14 : 18;
+      snake.head = {
+        x: wrap(snake.head.x, snake.columns),
+        y: Math.min(snake.head.y || randomRow(), snake.rows - 1),
+      };
+      snake.segments = snake.segments.slice(0, snake.visibleLength);
+
+      canvas.width = Math.ceil(width * dpr);
+      canvas.height = Math.ceil(height * dpr);
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    const chooseDirection = () => {
+      if (snake.direction !== "right") return "right";
+      if (snake.turnCooldown > 0) {
+        snake.turnCooldown -= 1;
+        return "right";
+      }
+
+      const roll = Math.random();
+      if (roll < 0.16 && snake.head.y > 2) {
+        snake.turnCooldown = 2 + Math.floor(Math.random() * 5);
+        return "up";
+      }
+      if (roll > 0.84 && snake.head.y < snake.rows - 3) {
+        snake.turnCooldown = 2 + Math.floor(Math.random() * 5);
+        return "down";
+      }
+
+      return "right";
+    };
+
+    const step = () => {
+      snake.direction = chooseDirection();
+
+      if (snake.direction === "up") snake.head.y = Math.max(0, snake.head.y - 1);
+      if (snake.direction === "down") snake.head.y = Math.min(snake.rows - 1, snake.head.y + 1);
+      if (snake.direction === "right") snake.head.x = wrap(snake.head.x + 1, snake.columns);
+
+      snake.segments.unshift({ ...snake.head, direction: snake.direction });
+      snake.segments = snake.segments.slice(0, snake.visibleLength);
+    };
+
+    const drawPixel = (x, y, index) => {
+      const size = snake.cell;
+      const gap = Math.max(3, Math.floor(size * 0.24));
+      const alpha = Math.max(0.018, 0.115 - index * 0.005);
+      const pixelSize = size - gap;
+
+      context.fillStyle = `rgba(15, 23, 42, ${alpha})`;
+      context.fillRect(
+        x * size + gap / 2,
+        y * size + gap / 2,
+        pixelSize,
+        pixelSize,
+      );
+    };
+
+    const draw = (time) => {
+      const width = canvas.width / dpr;
+      const height = canvas.height / dpr;
+      context.clearRect(0, 0, width, height);
+
+      if (!reducedMotion.matches && time - lastStep >= snake.stepMs) {
+        step();
+        lastStep = time;
+      }
+
+      snake.segments.forEach((segment, index) => {
+        drawPixel(segment.x, segment.y, index);
+      });
+
+      frameId = window.requestAnimationFrame(draw);
+    };
+
+    resize();
+    snake.head = { x: Math.floor(Math.random() * snake.columns), y: randomRow() };
+    snake.segments = Array.from({ length: snake.visibleLength }, (_, index) => ({
+      x: wrap(snake.head.x - index, snake.columns),
+      y: snake.head.y,
+      direction: "right",
+    }));
+
+    window.addEventListener("resize", resize, { passive: true });
+    frameId = window.requestAnimationFrame(draw);
+
+    document.addEventListener("astro:before-swap", () => {
+      window.cancelAnimationFrame(frameId);
+      window.removeEventListener("resize", resize);
+    });
+  })();
+</script>

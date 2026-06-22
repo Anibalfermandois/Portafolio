@@ -3,22 +3,20 @@
 % Packages:
 \usepackage[
     ignoreheadfoot, % set margins without considering header and footer
-    top=2 cm, % seperation between body and page edge from the top
-    bottom=2 cm, % seperation between body and page edge from the bottom
-    left=1 cm, % seperation between body and page edge from the left
-    right=2 cm, % seperation between body and page edge from the right
+    top=1.35 cm, % seperation between body and page edge from the top
+    bottom=1.35 cm, % seperation between body and page edge from the bottom
+    left=1.2 cm, % seperation between body and page edge from the left
+    right=1.2 cm, % seperation between body and page edge from the right
     footskip=1.0 cm, % seperation between body and footer
-    % showframe % for debugging 
 ]{geometry} % for adjusting page geometry
 \usepackage{titlesec} % for customizing section titles
 \usepackage{tabularx} % for making tables with fixed width columns
 \usepackage{array} % tabularx requires this
 \usepackage[dvipsnames]{xcolor} % for coloring text
-\definecolor{primaryColor}{RGB}{0, 0, 0} % define primary color
+\definecolor{primaryColor}{RGB}{128, 0, 0} % define primary color (Maroon)
 \usepackage{enumitem} % for customizing lists
 \usepackage{fontawesome5} % for using icons
 \usepackage{amsmath} % for math
-\usepackage{emoji} % for emoji support
 \usepackage[
     pdftitle={Anibal Fermandois CV},
     pdfauthor={Anibal Fermandois},
@@ -45,7 +43,8 @@
     \usepackage{lmodern}
 \fi
 
-\usepackage{charter}
+\usepackage{mathpazo} % Palatino font for Elegant Academic
+\linespread{1.03}     % Palatino needs more leading space
 
 % Some settings:
 \raggedright
@@ -57,17 +56,18 @@
 \setlength{\columnsep}{0.15cm} % set column seperation
 \pagenumbering{gobble} % no page numbering
 
-\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+% Section formatting for Academic: Centered, small caps, with rule
+\titleformat{\section}{\needspace{4\baselineskip}\large\scshape\centering\color{primaryColor}}{}{0pt}{}[\vspace{2pt}\color{primaryColor}\titlerule]
 
 \titlespacing{\section}{
     % left space:
     -1pt
 }{
     % top space:
-    0.3 cm
+    0.4 cm
 }{
     % bottom space:
-    0.2 cm
+    0.3 cm
 } % section title spacing
 
 \renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$} % custom bullet points
@@ -82,19 +82,6 @@
 }{
     \end{itemize}
 } % new environment for highlights
-
-
-\newenvironment{highlightsforbulletentries}{
-    \begin{itemize}[
-        topsep=0.10 cm,
-        parsep=0.10 cm,
-        partopsep=0pt,
-        itemsep=0pt,
-        leftmargin=10pt
-    ]
-}{
-    \end{itemize}
-} % new environment for highlights for bullet entries
 
 \newenvironment{onecolentry}{
     \begin{adjustwidth}{
@@ -117,40 +104,14 @@
     \endonecolentry
 } % new environment for two column entries
 
-\newenvironment{threecolentry}[3][]{
-    \onecolentry
-    \def\thirdColumn{#3}
-    \setcolumnwidth{, \fill, 4.5 cm}
-    \begin{paracol}{3}
-    {\raggedright #2} \switchcolumn
-}{
-    \switchcolumn \raggedleft \thirdColumn
-    \end{paracol}
-    \endonecolentry
-} % new environment for three column entries
-
 \newenvironment{header}{
     \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
 }{
     \par\kern\topsep
 } % new environment for the header
 
-\newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
-  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
-    \put(
-        \LenToUnit{\paperwidth-2 cm-0 cm+0.05cm},
-        \LenToUnit{\paperheight-1.0 cm}
-    ){\vtop{{\null}\makebox[0pt][c]{
-        \small\color{gray}\textit{Last updated in September 2024}\hspace{\widthof{Last updated in September 2024}}
-    }}}%
-  }%
-}%
-
 % save the original href command in a new command:
 \let\hrefWithoutArrow\href
-
-% new command for external links:
-
 
 \begin{document}
     \newcommand{\AND}{\unskip
@@ -158,175 +119,152 @@
         \ignorespaces
     }
     \newsavebox\ANDbox
-    \sbox\ANDbox{$|$}
+    \sbox\ANDbox{\textbullet} % use bullet points for academic separator
 
     \begin{header}
-        \fontsize{25 pt}{25 pt}\selectfont Aníbal Fermandois
+        \fontsize{24 pt}{24 pt}\selectfont \scshape Aníbal Fermandois
 
         \vspace{5 pt}
 
         \normalsize
+        \mbox{\textit{Desarrollador Full Stack \& Infraestructura de IA}}
 
-        \mbox{\hrefWithoutArrow{mailto:anibal.fermandois@uc.cl}{anibal.fermandois@uc.cl}}%
+        \vspace{5 pt}
+
+        \mbox{\faEnvelope\ \hrefWithoutArrow{mailto:anibal.fermandois@gmail.com}{anibal.fermandois@gmail.com}}%
         \kern 5.0 pt%
         \AND%
         \kern 5.0 pt%
-        \mbox{\hrefWithoutArrow{}{+569-6617-0056}}%
+        \mbox{\faPhone\ \hrefWithoutArrow{}{+569-6617-0056}}%
         \kern 5.0 pt%
         \AND%
         \kern 5.0 pt%
+        \mbox{\faLinkedin\ \hrefWithoutArrow{https://
+        linkedin.com/in/anibal-fermandois-224ab4262/}{linkedin.com/anibal-fermandois}}%
         \kern 5.0 pt%
         \AND%
         \kern 5.0 pt%
-        \mbox{\hrefWithoutArrow{https://github.com/Anibalfermandois}{www.github.com/Anibalfermandois}}%
-        \kern 5.0 pt%
-        \AND%
-        \kern 5.0 pt%
-        \kern 5.0 pt%
-        \AND%
-        \kern 5.0 pt%
-        \mbox{\hrefWithoutArrow{https://anibalfermandois.onrender.com/}{www.anibalfermandois.com/}}%
+        \mbox{\faGlobe\ \hrefWithoutArrow{https://www.anibalfermandois.com/}{www.anibalfermandois.com}}%
     \end{header}
 
     \vspace{5 pt - 0.3 cm}
 
-
     \section{Educación}
 
-
-
-        
-        \begin{twocolentry}{
-            Año 2020 – Presente
-        }
-            \begin{highlights}
-            \item  \textbf{Pontificia Universidad Católica de Chile}, Título Ingeniería Civil Industrial Diplomado en Computación
-            \item Certificado de Desarrollo Frontend \textbf{Launchpad}
-        \end{highlights}
-\end{twocolentry}
-
-    
-    \section{Experiencia}
-\begin{twocolentry}
-    {
-    4 meses \\
-    \vspace{0.1cm}
-    4 meses \\
-    \vspace{0.1cm}
-    1 año \\
-    \vspace{0.1cm}
-    1 año \\
-    \vspace{0.1cm}
-    1 año \\
-    \vspace{0.1cm}
-    2 años \\
-
-        }
-        \begin{highlights}
-        \item Programador Infraestructura IA en Buda.com 
-        \item Programador FullStack en \hrefWithoutArrow{https://recordabot.vercel.app/}{Nikola}
-        \item Profesor en Preuniversitario PreuIng UC
-        \item Profesor en proyecto Going UC
-        
-        \item  Ayudante Jefe Debates Constitucionales
-        
-\end{highlights}
-\end{twocolentry}
-  \section{Proyectos}
-\vspace{0.2 cm}
-\begin{enumerate}
-    \item \begin{twocolentry}{
-        \hrefWithoutArrow{https://bcibeneficios.onrender.com/}{https://bcibeneficios.onrender.com/}
-    }
-        \textbf{BCI Beneficios}
+    \begin{twocolentry}{Año 2020 – Presente}
+        \textbf{Pontificia Universidad Católica de Chile}
     \end{twocolentry}
     \vspace{0.10 cm}
     \begin{onecolentry}
         \begin{highlights}
-            \item Una versión mejorada de pagina de \textbf{\href{https://www.bci.cl/beneficios/beneficios-bci}{descuentos BCI+ \textit{(comparalas)}}}  enfocada en velocidad al cargar cientos de imagenes e integrar lo que le falta a la original: filtros, minimos, categorias, etc. 
-            \item Herramientas Utilizadas: Astro, Cronjobs, Typescript, Render.
+            \item Título \textbf{Ingeniería Civil Industrial}, Diplomado en Computación
+            \item Certificado de Desarrollo Frontend \textbf{Launchpad}
         \end{highlights}
     \end{onecolentry}
 
+    \section{Experiencia Profesional}
 
-    \item \begin{twocolentry}{
-        \hrefWithoutArrow{https://recordabot.vercel.app/}{https://recordabot.vercel.app/}
-    }
-        \textbf{RecordaBot}
+    \begin{twocolentry}{May 2026 -- Presente}
+        \textbf{Falabella} -- \textit{Ingeniero de Planificación y Desarrollo}
     \end{twocolentry}
     \vspace{0.10 cm}
     \begin{onecolentry}
         \begin{highlights}
-            \item Sitio para programar recordatorios de deudas a conocidos. Diseñada para correr \textit{cron jobs} asyncrónicamente.
-            \item Herramientas Utilizadas: Nextjs, Tailwind, Typescript, Resend.
+            \item Exploro datos históricos en BigQuery con Python, pandas y polars, definiendo métricas, supuestos y filtros para evaluar políticas de asignación y reposición por tienda.
+            \item Pruebo modelos, detecto relaciones no lineales, parcheo datos inconsistentes y traduzco hallazgos en recomendaciones accionables para futuras políticas de abastecimiento.
         \end{highlights}
     \end{onecolentry}
     \vspace{0.2 cm}
-    
-    \item \begin{twocolentry}{
-        \href{https://micarritochile.vercel.app/}{https://micarritochile.vercel.app/}
-    }
-        \textbf{Mi Carrito}
+
+    \begin{twocolentry}{Ago 2025 – Dic 2025}
+        \textbf{Buda.com} -- \textit{Practicante de Automatización y AI}
     \end{twocolentry}
     \vspace{0.10 cm}
     \begin{onecolentry}
         \begin{highlights}
-            \item Sitio de \textit{E-commerce} para comparar precios entre supermercados. Utilizando \textit{web scrapers} para la base de datos. 
-            \item Herramientas Utilizadas: Nextjs, Tailwind, Playwrite, Postgres, Typescript
+            \item Lideré la investigación y despliegue en producción de un Chatbot de IA empresarial conectando APIs complejas (Contextual Chunking, HyDE) logrando una tasa de acierto superior al 95\%.
+            \item Desarrollé recuperación de información de alta precisión utilizando Contextual Embedding y MultiVector Indexing.
+            \item Arquitecté pipelines de automatización robustos usando n8n para procesos críticos de la empresa.
         \end{highlights}
     \end{onecolentry}
-    \item \textbf{Excluido}
-    \vspace{0.10 cm}
-    \begin{onecolentry}
-        \begin{highlights}
-            \item Aplicación Juego de Cartas con funcionalidad multijugador en tiempo real procesado por un servidor backend y utilizando MQTT como protocolo.
-            \item Herramientas Utilizadas: Django, Kotlin, Android Studio, Firebase, Mosquito
-        \end{highlights}
-    \end{onecolentry}
-    \item \textbf{Sendapp}
-    \vspace{0.10 cm}
-    \begin{onecolentry}
-        \begin{highlights}
-            \item Aplicación que revisa las últimas fotos sacadas enviándolas automaticamente a aquellos presentes en ella. 
-            \item Herramientas Utilizadas: React Native, Selenium, Expo 
-        \end{highlights}
-    \end{onecolentry}
-    \item \begin{twocolentry}{
-    }
-        \textbf{Firefly III Integrations}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{Mar 2025 – Ago 2025}
+        \textbf{Nikola Chile} -- \textit{Desarrollador Full-Stack}
     \end{twocolentry}
     \vspace{0.10 cm}
     \begin{onecolentry}
         \begin{highlights}
-            \item Integracion de \textbf{\href{https://www.firefly-iii.org/}{Firefly III, finance manager}} con Outlook, Google Cloud y mobile, permitiendo la notificacion mobil y actualización automatica de la base de datos personal con cada gasto de mi tarjeta.
-            \item Herramientas Utilizadas: Docker, Ngrok, Google Cloud, Firefly III
+            \item Diseñé y lancé la infraestructura de alto rendimiento en Next.js y Django para nikola.cl, dominando las decisiones de extremo a extremo.
+            \item Dirigí la migración de sistemas heredados a arquitecturas modernas y escalables.
+            \item Lideré la implementación de pipelines automatizados de calidad de código y herramientas de visualización de infraestructura.
+            \item \textbf{Diploma de Reconocimiento} por liderar y desempeño en el desarrollo de la \href{www.nikola.cl}{actual página} web.
         \end{highlights}
     \end{onecolentry}
-\end{enumerate}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{1 año}
+        \textbf{Preuniversitario PreuIng UC} -- \textit{Profesor}
+    \end{twocolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{1 año}
+        \textbf{Proyecto Going UC} -- \textit{Profesor}
+    \end{twocolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{2 años}
+        \textbf{Debates Constitucionales} -- \textit{Ayudante Jefe}
+    \end{twocolentry}
+
+    \section{Proyectos de Ingeniería}
+
+    \begin{twocolentry}{Astro, WebScraping}
+        \textbf{\hrefWithoutArrow{https://beascorner.onrender.com/}{Bea's Corner}}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Centraliza precios y disponibilidad  para \textbf{maquillajes} de múltiples tiendas chilenas (Falabella, Paris, Blushbar).
+        \end{highlights}
+    \end{onecolentry}
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{Astro, Edge Functions}
+        \textbf{\href{https://bcibeneficios.onrender.com/}{BCI Beneficios}}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Versión mejorada del sitio \textbf{\textit{BCI+ Descuentos} }enfocada en velocidad de carga y usabilidad, integrando filtros, topes mínimos y categorías avanzadas.
+        \end{highlights}
+    \end{onecolentry}
+    \vspace{0.2 cm}
 
 
+    \begin{twocolentry}{Next.js, Playwright, Postgres}
+        \textbf{\hrefWithoutArrow{https://micarritochile.vercel.app/}{Mi Carrito}}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Plataforma \textit{E-commerce} que utiliza \textit{web scrapers} automáticos para comparar precios en tiempo real entre múltiples supermercados chilenos.
+        \end{highlights}
+    \end{onecolentry}
 
 
-    
-    \section{Tecnologias}
+    \section{Competencias Técnicas y Lingüísticas}
 
-
-
-        
-        \begin{onecolentry}
-            \textbf{Lenguajes:}  Python, Javascript, Typescript, Go, C, SQL
-        \end{onecolentry}
-
-        \vspace{0.2 cm}
-
-        \begin{onecolentry}
-            \textbf{Herramientas:} Django, Astro, Nextjs, React, N8N, Postgres, Mongo DB, CloudFront, AWS, Vercel, Render \end{onecolentry}
-
-\section{Idiomas}
-\begin{itemize}
-\item Ingles C1
-\item Francés B1
-\end{itemize}
-    
+    \begin{onecolentry}
+        \textbf{Lenguajes:} Python, Javascript, Typescript, Mojo, C, SQL
+    \end{onecolentry}
+    \vspace{0.1 cm}
+    \begin{onecolentry}
+        \textbf{Herramientas:} Django, Astro, Next.js, React, n8n, Postgres, MongoDB, AWS, Vercel, Render
+    \end{onecolentry}
+    \vspace{0.1 cm}
+    \begin{onecolentry}
+        \textbf{Idiomas:} Inglés (C1 Toefl), Francés (B1 ICP Université)
+    \end{onecolentry}
 
 \end{document}

@@ -1,0 +1,88 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=1.15cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{microtype}
+
+\definecolor{ink}{RGB}{18,24,33}
+\definecolor{accent}{RGB}{0,86,122}
+\definecolor{muted}{RGB}{91,103,112}
+\hypersetup{colorlinks=true,urlcolor=accent}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{0pt}
+\setlist[itemize]{leftmargin=1.2em,itemsep=1pt,topsep=2pt,parsep=0pt}
+\titleformat{\section}{\bfseries\large\color{ink}}{}{0pt}{\MakeUppercase}[\vspace{-2pt}{\color{accent}\rule{\linewidth}{0.7pt}}]
+\titlespacing*{\section}{0pt}{8pt}{5pt}
+\newcommand{\role}[4]{%
+  \begin{tabularx}{\linewidth}{@{}Xr@{}}
+    \textbf{#1} \hspace{3pt} {\color{accent}#2} & {\color{muted}#3} \\
+  \end{tabularx}
+  #4
+}
+
+\begin{document}
+\color{ink}
+
+{\fontsize{26}{28}\selectfont\bfseries Aníbal Fermandois}\\
+{\large AI Infrastructure \& Full-Stack Software Engineer}\\
+\vspace{3pt}
+\href{mailto:anibal.fermandois@gmail.com}{anibal.fermandois@gmail.com} \quad
++569-6617-0056 \quad
+\href{https://www.linkedin.com/in/anibal-fermandois-224ab4262/}{linkedin.com/anibal-fermandois} \quad
+\href{https://www.anibalfermandois.com/}{www.anibalfermandois.com}
+
+\section{Positioning}
+Software engineer and Industrial Civil Engineering student focused on AI infrastructure, automation, analytics, and full-stack product delivery. I work well where the problem is not fully specified yet: defining metrics, testing assumptions, building the system, and turning results into operational decisions.
+
+\section{Experience}
+\role{Falabella}{Planning and Development Engineer}{May 2026 -- Present}{
+\begin{itemize}
+  \item Explore historical BigQuery data with Python, pandas, and polars to define metrics, filters, and assumptions for store allocation and replenishment policy.
+  \item Test models, inspect nonlinear behavior, patch inconsistent data, and convert analysis into concrete recommendations for future supply decisions.
+\end{itemize}}
+
+\role{Buda.com}{Automation and AI Intern}{Aug 2025 -- Dec 2025}{
+\begin{itemize}
+  \item Led research and production deployment of an enterprise AI chatbot integrating complex APIs, Contextual Chunking, HyDE, and context engineering, reaching above 95\% answer accuracy.
+  \item Built high-precision retrieval with Contextual Embedding and MultiVector Indexing, improving relevance across internal knowledge sources.
+  \item Architected robust n8n automation pipelines for critical company workflows, balancing reliability, maintainability, and speed.
+\end{itemize}}
+
+\role{Nikola Chile}{Full-Stack Developer}{Mar 2025 -- Aug 2025}{
+\begin{itemize}
+  \item Designed and shipped the high-performance Next.js and Django architecture for \href{https://www.nikola.cl}{nikola.cl}, owning frontend, backend, deployment, and quality decisions.
+  \item Led migration from legacy systems to scalable web architecture with automated code-quality pipelines and infrastructure visibility.
+  \item Recognized for leadership and delivery on the current company website.
+\end{itemize}}
+
+\role{Preuniversitario PreuIng UC}{Teacher}{1 year}{}
+\role{Proyecto Going UC}{Teacher}{1 year}{}
+\role{Debates Constitucionales}{Head Teaching Assistant}{2 years}{}
+
+\section{Selected Projects}
+\begin{itemize}
+  \item \textbf{\href{https://beascorner.onrender.com/}{Bea's Corner}} -- Astro marketplace scraper that centralizes makeup pricing and availability across Chilean retailers.
+  \item \textbf{\href{https://bcibeneficios.onrender.com/}{BCI Beneficios}} -- Faster, more usable BCI+ discounts experience with filters, categories, minimums, and caps.
+  \item \textbf{\href{https://micarritochile.vercel.app/}{Mi Carrito}} -- Price comparison platform using automated scrapers for Chilean supermarkets.
+\end{itemize}
+
+\section{Education}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+\textbf{Pontificia Universidad Católica de Chile} -- Industrial Civil Engineering, Computing Diploma & 2020 -- Present \\
+\end{tabularx}
+Frontend Development Certificate, Launchpad.
+
+\section{Stack}
+\textbf{Languages:} Python, JavaScript, TypeScript, Mojo, C, SQL \\
+\textbf{Tools:} Django, Astro, Next.js, React, n8n, Postgres, MongoDB, AWS, Vercel, Render \\
+\textbf{Human languages:} English C1 TOEFL, French B1 ICP Université, Spanish native
+
+\end{document}

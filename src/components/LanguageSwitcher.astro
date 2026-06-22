@@ -1,0 +1,44 @@
+---
+import {
+    getLocalePath,
+    localeLabels,
+    localeNames,
+    locales,
+    type Locale,
+} from "../i18n/config";
+import { ui } from "../i18n/ui";
+
+interface Props {
+    locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = ui[locale].language;
+---
+
+<nav
+    class="fixed right-4 top-4 z-50 flex items-center gap-1 rounded-lg border border-slate-200/80 bg-white/85 p-1 text-xs font-black uppercase tracking-widest text-slate-600 shadow-lg shadow-slate-900/5 backdrop-blur-md"
+    aria-label={copy.label}
+>
+    {
+        locales.map((option) => {
+            const active = option === locale;
+            const href = `/${option}`;
+            return (
+                <a
+                    href={href}
+                    class:list={[
+                        "flex h-8 min-w-10 items-center justify-center rounded-md px-3 transition-colors",
+                        active
+                            ? "bg-slate-900 text-white"
+                            : "text-slate-500 hover:bg-slate-100 hover:text-slate-950",
+                    ]}
+                    aria-current={active ? "page" : undefined}
+                    aria-label={`${copy.switchTo} ${localeNames[option]}`}
+                >
+                    {localeLabels[option]}
+                </a>
+            );
+        })
+    }
+</nav>

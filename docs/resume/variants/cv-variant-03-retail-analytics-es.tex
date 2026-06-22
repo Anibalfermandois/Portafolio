@@ -1,0 +1,110 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=1.1cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathpazo}
+\linespread{1.01}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{paracol}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{microtype}
+
+\definecolor{accent}{RGB}{0,103,94}
+\definecolor{soft}{RGB}{236,245,243}
+\definecolor{muted}{RGB}{86,92,96}
+\hypersetup{colorlinks=true,urlcolor=accent}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\columnsep}{0.45cm}
+\setlength{\tabcolsep}{0pt}
+\setlist[itemize]{leftmargin=1.1em,itemsep=1pt,topsep=2pt,parsep=0pt}
+\titleformat{\section}{\large\bfseries\color{accent}}{}{0pt}{}[\vspace{1pt}\titlerule]
+\titlespacing*{\section}{0pt}{7pt}{4pt}
+\newcommand{\minihead}[1]{\vspace{5pt}{\bfseries\color{accent}#1}\par\vspace{2pt}}
+
+\begin{document}
+
+\begin{center}
+{\fontsize{23}{24}\selectfont\bfseries Aníbal Fermandois}\\
+{\color{accent}Data, AI Infrastructure \& Full-Stack Engineering}\\
+\vspace{3pt}
+\href{mailto:anibal.fermandois@gmail.com}{anibal.fermandois@gmail.com} \quad
++569-6617-0056 \quad
+\href{https://www.linkedin.com/in/anibal-fermandois-224ab4262/}{LinkedIn} \quad
+\href{https://www.anibalfermandois.com/}{www.anibalfermandois.com}
+\end{center}
+
+\columnratio{0.68}
+\begin{paracol}{2}
+
+\section{Experiencia con impacto}
+\textbf{Falabella -- Ingeniero de Planificación y Desarrollo} \hfill {\color{muted}May 2026 -- Presente}
+\begin{itemize}
+  \item Construyo análisis sobre BigQuery con Python, pandas y polars para entender comportamiento histórico de tiendas, asignación y reposición.
+  \item Defino métricas, filtros y supuestos reproducibles para separar señal operacional de ruido, datos incompletos o criterios inconsistentes.
+  \item Pruebo modelos y relaciones no lineales, convirtiendo resultados en recomendaciones concretas para futuras políticas de abastecimiento.
+\end{itemize}
+
+\textbf{Buda.com -- Practicante de Automatización y AI} \hfill {\color{muted}Ago 2025 -- Dic 2025}
+\begin{itemize}
+  \item Desplegué un chatbot corporativo con RAG avanzado, Contextual Chunking, HyDE y APIs complejas, alcanzando más de 95\% de precisión.
+  \item Implementé recuperación con Contextual Embedding y MultiVector Indexing para mejorar relevancia y trazabilidad.
+  \item Diseñé automatizaciones n8n para flujos críticos, enfocadas en confiabilidad operativa.
+\end{itemize}
+
+\textbf{Nikola Chile -- Desarrollador Full-Stack} \hfill {\color{muted}Mar 2025 -- Ago 2025}
+\begin{itemize}
+  \item Lideré arquitectura Next.js y Django para \href{https://www.nikola.cl}{nikola.cl}, cubriendo producto, frontend, backend y despliegue.
+  \item Migré sistemas heredados hacia arquitectura web moderna con pipelines de calidad y monitoreo.
+  \item Recibí reconocimiento por liderazgo y desempeño en el desarrollo de la página actual.
+\end{itemize}
+
+\textbf{PreuIng UC, Going UC, Debates Constitucionales} \hfill {\color{muted}4 años combinados}\\
+Docencia, coordinación académica y ayudantía jefe.
+
+\section{Proyectos}
+\begin{itemize}
+  \item \textbf{\href{https://beascorner.onrender.com/}{Bea's Corner}} -- Scraping y disponibilidad de productos de maquillaje en Falabella, Paris y Blushbar.
+  \item \textbf{\href{https://bcibeneficios.onrender.com/}{BCI Beneficios}} -- Beneficios BCI+ rediseñados con filtros rápidos, topes y categorías.
+  \item \textbf{\href{https://micarritochile.vercel.app/}{Mi Carrito}} -- Comparación de precios de supermercados con scrapers automáticos.
+\end{itemize}
+
+\switchcolumn
+\footnotesize
+\raggedright
+\colorbox{soft}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{5pt}
+\textbf{\color{accent}Foco}\\
+Data science aplicada, reposición, automatización, infraestructura de IA, software full-stack.
+\vspace{5pt}}}
+
+\minihead{Educación}
+\textbf{Pontificia Universidad Católica}\\
+de Chile\\
+Ingeniería Civil Industrial, Diplomado en Computación\\
+2020 -- Presente\\
+Certificado Frontend Launchpad
+
+\minihead{Herramientas}
+Python, pandas, polars, BigQuery, SQL, TypeScript, JavaScript, Mojo, C
+
+\minihead{Frameworks}
+Django, Astro, Next.js, React, n8n
+
+\minihead{Infraestructura}
+Postgres, MongoDB, AWS, Vercel, Render
+
+\minihead{Idiomas}
+Español nativo\\
+Inglés C1 TOEFL\\
+Francés B1 ICP Université
+
+\minihead{Contacto}
+\href{mailto:anibal.fermandois@gmail.com}{anibal.fermandois@gmail.com}\\
+\href{https://www.anibalfermandois.com/}{www.anibalfermandois.com}
+
+\end{paracol}
+
+\end{document}

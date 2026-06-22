@@ -1,8 +1,18 @@
 ---
 import { getCollection, render } from "astro:content";
 import EditorialImage from "./EditorialImage.astro";
+import type { Locale } from "../i18n/config";
+import { ui } from "../i18n/ui";
 
-const projectsCollection = await getCollection("projects");
+interface Props {
+    locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = ui[locale].projects;
+const projectsCollection = (await getCollection("projects")).filter((entry) =>
+    entry.id.startsWith(`${locale}/`),
+);
 ---
 
 <section id="projects" class="py-20 px-6 max-w-5xl mx-auto reveal">
@@ -12,10 +22,10 @@ const projectsCollection = await getCollection("projects");
                 class="text-3xl font-bold text-slate-900 mb-4 flex items-center gap-4"
             >
                 <span class="w-8 h-1 bg-blue-600 rounded-full"></span>
-                Proyectos Personales
+                {copy.title}
             </h2>
             <p class="text-slate-500">
-                Una selección de mis trabajos técnicos recientes.
+                {copy.description}
             </p>
         </div>
     </div>
@@ -41,7 +51,7 @@ const projectsCollection = await getCollection("projects");
                                     />
                                 ) : (
                                     <div class="w-full h-full flex items-center justify-center text-slate-400">
-                                        Imagen no disponible
+                                        {copy.missingImage}
                                     </div>
                                 )}
                             </div>

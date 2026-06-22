@@ -1,0 +1,91 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=1.25cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{charter}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{microtype}
+
+\definecolor{accent}{RGB}{128,0,0}
+\definecolor{textgray}{RGB}{55,55,55}
+\hypersetup{colorlinks=true,urlcolor=accent}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{0pt}
+\setlist[itemize]{leftmargin=1.1em,itemsep=1pt,topsep=2pt,parsep=0pt}
+\titleformat{\section}{\large\scshape\color{accent}}{}{0pt}{}[\vspace{1pt}\titlerule]
+\titlespacing*{\section}{0pt}{8pt}{5pt}
+\newcommand{\entry}[4]{%
+  \begin{tabularx}{\linewidth}{@{}Xr@{}}
+    \textbf{#1} -- \textit{#2} & {\color{textgray}#3} \\
+  \end{tabularx}
+  #4
+}
+
+\begin{document}
+
+\begin{center}
+  {\fontsize{24}{25}\selectfont\scshape Aníbal Fermandois}\\
+  \vspace{3pt}
+  {\color{accent}\textit{Desarrollador Full Stack \& Infraestructura de IA}}\\
+  \vspace{4pt}
+  \href{mailto:anibal.fermandois@gmail.com}{anibal.fermandois@gmail.com} \quad
+  +569-6617-0056 \quad
+  \href{https://www.linkedin.com/in/anibal-fermandois-224ab4262/}{linkedin.com/anibal-fermandois} \quad
+  \href{https://www.anibalfermandois.com/}{www.anibalfermandois.com}
+\end{center}
+
+\section{Perfil}
+Ingeniero Civil Industrial en formación con foco en software, automatización e infraestructura de IA. Combino criterio de negocio, análisis de datos y construcción full-stack para transformar problemas ambiguos en sistemas operables, medibles y escalables.
+
+\section{Educación}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+\textbf{Pontificia Universidad Católica de Chile} & Año 2020 -- Presente \\
+\end{tabularx}
+\begin{itemize}
+  \item Título de Ingeniería Civil Industrial, Diplomado en Computación.
+  \item Certificado de Desarrollo Frontend Launchpad.
+\end{itemize}
+
+\section{Experiencia Profesional}
+\entry{Falabella}{Ingeniero de Planificación y Desarrollo}{May 2026 -- Presente}{
+\begin{itemize}
+  \item Analizo datos históricos en BigQuery con Python, pandas y polars para construir métricas, supuestos y filtros que expliquen decisiones de asignación y reposición por tienda.
+  \item Evalúo modelos, identifico relaciones no lineales y reparo inconsistencias de datos para convertir hallazgos analíticos en recomendaciones accionables de abastecimiento.
+\end{itemize}}
+
+\entry{Buda.com}{Practicante de Automatización y AI}{Ago 2025 -- Dic 2025}{
+\begin{itemize}
+  \item Lideré investigación y despliegue de un chatbot corporativo con RAG avanzado, Contextual Chunking, HyDE y APIs complejas, superando 95\% de precisión.
+  \item Implementé recuperación de información con Contextual Embedding y MultiVector Indexing para mejorar relevancia y trazabilidad.
+  \item Diseñé pipelines de automatización en n8n para procesos críticos, priorizando robustez, mantenimiento y adopción interna.
+\end{itemize}}
+
+\entry{Nikola Chile}{Desarrollador Full-Stack}{Mar 2025 -- Ago 2025}{
+\begin{itemize}
+  \item Diseñé y lancé arquitectura en Next.js y Django para \href{https://www.nikola.cl}{nikola.cl}, tomando decisiones end-to-end de producto, frontend, backend y despliegue.
+  \item Dirigí migración desde sistemas heredados hacia componentes web modernos, pipelines de calidad y herramientas de monitoreo.
+  \item Recibí diploma de reconocimiento por liderazgo y desempeño en el desarrollo de la página actual.
+\end{itemize}}
+
+\entry{Preuniversitario PreuIng UC}{Profesor}{1 año}{}
+\entry{Proyecto Going UC}{Profesor}{1 año}{}
+\entry{Debates Constitucionales}{Ayudante Jefe}{2 años}{}
+
+\section{Proyectos de Ingeniería}
+\begin{itemize}
+  \item \textbf{\href{https://beascorner.onrender.com/}{Bea's Corner}} -- Astro, scraping y automatización para centralizar precios y disponibilidad de maquillaje en tiendas chilenas.
+  \item \textbf{\href{https://bcibeneficios.onrender.com/}{BCI Beneficios}} -- Rediseño rápido y filtrable del sitio BCI+ Descuentos, con categorías, mínimos y topes visibles.
+  \item \textbf{\href{https://micarritochile.vercel.app/}{Mi Carrito}} -- Plataforma e-commerce con scrapers automáticos para comparar precios entre supermercados chilenos.
+\end{itemize}
+
+\section{Competencias}
+\textbf{Lenguajes:} Python, JavaScript, TypeScript, Mojo, C, SQL \\
+\textbf{Herramientas:} Django, Astro, Next.js, React, n8n, Postgres, MongoDB, AWS, Vercel, Render \\
+\textbf{Idiomas:} Inglés C1 TOEFL, Francés B1 ICP Université
+
+\end{document}

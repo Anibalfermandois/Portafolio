@@ -1,17 +1,32 @@
 ---
 import "../styles/global.css";
 import { Font } from "astro:assets";
+import SnakeBackground from "../components/SnakeBackground.astro";
+import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import favicon from "../../public/favicon.ico";
+import {
+	defaultLocale,
+	getLocalePath,
+	locales,
+	type Locale,
+} from "../i18n/config";
+import { ui } from "../i18n/ui";
 interface Props {
 	title: string;
 	description?: string;
+	locale?: Locale;
 }
 
-const { title, description = "Aníbal Fermandois - Porfolio" } = Astro.props;
+const {
+	title,
+	description = ui[defaultLocale].pageDescription,
+	locale = defaultLocale,
+} = Astro.props;
+const htmlLang = ui[locale].htmlLang;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={htmlLang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
@@ -36,11 +51,23 @@ const { title, description = "Aníbal Fermandois - Porfolio" } = Astro.props;
 			href="/favicon-16x16.png"
 		/>
 		<link rel="manifest" href="/site.webmanifest" />
+		{
+			locales.map((availableLocale) => (
+				<link
+					rel="alternate"
+					hreflang={ui[availableLocale].htmlLang}
+					href={getLocalePath(availableLocale)}
+				/>
+			))
+		}
+		<link rel="alternate" hreflang="x-default" href={getLocalePath(defaultLocale)} />
 		<Font cssVariable="--font-outfit" preload />
 		<Font cssVariable="--font-geist" preload />
 		<title>{title}</title>
 	</head>
 	<body>
+		<SnakeBackground />
+		<LanguageSwitcher locale={locale} />
 		<slot />
 		<script>
 			const observerOptions = {
