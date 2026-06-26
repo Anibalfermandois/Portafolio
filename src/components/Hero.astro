@@ -82,12 +82,12 @@ const personalInfo = personalInfoEntry.data;
         </div>
     </div>
     <div
-        class="relative w-48 h-48 md:w-80 md:h-80 shrink-0"
+        class="relative w-52 md:w-72 shrink-0 aspect-[4/5] overflow-hidden rounded-2xl border border-white/80 bg-slate-100 shadow-2xl ring-4 ring-white"
     >
         <Image
             src={profileImage}
             alt={personalInfo.name}
-            class="w-full h-full object-cover rounded-full shadow-2xl ring-4 ring-white z-10 relative"
+            class="w-full h-full object-cover"
             loading="eager"
         />
     </div>
